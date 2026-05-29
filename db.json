@@ -1,0 +1,13 @@
+{
+  "products": [
+    {
+      "name": "لپتاپ استوک HP",
+      "price": 50000000,
+      "stock": 1,
+      "category": "دیجیتال",
+      "status": "available",
+      "id": "MXIJU9cxJsw"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
