@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import Input from "./ui/Input";
-import Select from "./ui/Select";
-import Button from "./ui/Button";
+import Input from "@/components/ui/Input";
+import Select from "@/components/ui/Select";
+import Button from "@/components/ui/Button";
 
 const categoryOptions = [
   { value: "digital", label: "دیجیتال" },

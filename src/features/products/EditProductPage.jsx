@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useCallback, useContext } from "react";
-import ProductForm from "../../components/ProductForm";
+import ProductForm from "./components/ProductForm";
 import { ProductContext } from "../../context/ProductProvider";
 
 const EditProductPage = () => {

@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button from "../../components/ui/Button";
 import { ProductContext } from "../../context/ProductProvider";
+import DeleteProductDialog from "./components/DeleteProductDialog";
 
 const ProductsPage = () => {
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const { products, loading, fetchProducts, removeProduct } =
     useContext(ProductContext);
 
@@ -11,8 +14,15 @@ const ProductsPage = () => {
     fetchProducts();
   }, [fetchProducts]);
 
-  const handleRemoveProduct = async (id) => {
-    removeProduct(id);
+  const handleRemoveProduct = (product) => {
+    setSelectedProduct(product);
+    setIsDeleteOpen(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    removeProduct(selectedProduct?.id);
+    setIsDeleteOpen(false);
+    setSelectedProduct(null);
   };
 
   if (loading) return <p>در حال دریافت محصولات ...</p>;
@@ -68,7 +78,7 @@ const ProductsPage = () => {
                   <Button
                     size={"sm"}
                     variant={"danger"}
-                    onClick={() => handleRemoveProduct(product.id)}
+                    onClick={() => handleRemoveProduct(product)}
                   >
                     حذف
                   </Button>
@@ -78,6 +88,12 @@ const ProductsPage = () => {
           </tbody>
         </table>
       </div>
+      <DeleteProductDialog
+        isOpen={isDeleteOpen}
+        productName={selectedProduct?.name}
+        onClose={() => setIsDeleteOpen(false)}
+        onConfirm={handleConfirmDelete}
+      />
     </div>
   );
 };
