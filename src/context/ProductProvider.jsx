@@ -8,6 +8,7 @@ const ProductContext = createContext({
   fetchProducts: () => {},
   removeProduct: () => {},
   addNewProduct: () => {},
+  EditProduct: () => {},
 });
 
 const productReducer = (state, action) => {
@@ -29,6 +30,16 @@ const productReducer = (state, action) => {
         products: [...state.products, action.payload],
       };
 
+    case "EDIT_PRODUCT":
+      return {
+        ...state,
+        products: state.products.map((product) =>
+          product.id === action.payload.id
+            ? { ...product, ...action.payload.data }
+            : product,
+        ),
+      };
+
     default:
       return { state };
   }
@@ -46,23 +57,40 @@ const ProductProvider = ({ children }) => {
     productDispatch({ type: "SET_PRODUCTS", payload: data });
   }, [sendRequest]);
 
-  const addNewProduct = async (data) => {
-    await sendRequest("http://localhost:3001/products", {
-      method: "POST",
-      body: {
-        ...data,
-        status: data.stock > 0 ? "available" : "unavailable",
-      },
-    });
-    productDispatch({ type: "ADD_PRODUCT", payload: data });
-  };
+  const addNewProduct = useCallback(
+    async (data) => {
+      const productData = await sendRequest("http://localhost:3001/products", {
+        method: "POST",
+        body: {
+          ...data,
+          status: data.stock > 0 ? "available" : "unavailable",
+        },
+      });
+      productDispatch({ type: "ADD_PRODUCT", payload: productData });
+    },
+    [sendRequest],
+  );
 
-  const removeProduct = async (id) => {
-    await sendRequest(`http://localhost:3001/products/${id}`, {
-      method: "DELETE",
-    });
-    productDispatch({ type: "REMOVE_PRODUCT", payload: id });
-  };
+  const EditProduct = useCallback(
+    async (id, data) => {
+      await sendRequest(`http://localhost:3001/products/${id}`, {
+        method: "PATCH",
+        body: data,
+      });
+      productDispatch({ type: "EDIT_PRODUCT", payload: { id, data } });
+    },
+    [sendRequest],
+  );
+
+  const removeProduct = useCallback(
+    async (id) => {
+      await sendRequest(`http://localhost:3001/products/${id}`, {
+        method: "DELETE",
+      });
+      productDispatch({ type: "REMOVE_PRODUCT", payload: id });
+    },
+    [sendRequest],
+  );
 
   const value = {
     products: productState.products,
@@ -71,6 +99,7 @@ const ProductProvider = ({ children }) => {
     fetchProducts,
     removeProduct,
     addNewProduct,
+    EditProduct,
   };
 
   return (

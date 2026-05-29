@@ -23,7 +23,7 @@ const ProductsPage = () => {
         <h2 className="text-xl font-vazir_bold text-slate-800">
           مدیریت محصولات
         </h2>
-        <Link to={"/dashboard/products/addnewproduct"}>
+        <Link to={"/dashboard/products/addNewProduct"}>
           <Button size={"md"} variant={"outline"}>
             افزودن محصول جدید
           </Button>
@@ -60,9 +60,11 @@ const ProductsPage = () => {
                   </span>
                 </td>
                 <td className="p-4 flex items-center gap-x-2">
-                  <Button size={"sm"} variant={"primary"}>
-                    ویرایش
-                  </Button>
+                  <Link to={`/dashboard/products/editProduct/${product.id}`}>
+                    <Button size={"sm"} variant={"primary"}>
+                      ویرایش
+                    </Button>
+                  </Link>
                   <Button
                     size={"sm"}
                     variant={"danger"}

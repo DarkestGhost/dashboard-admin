@@ -3,6 +3,7 @@ import DashboardLayout from "./layout/DashboardLayout";
 import ProductsPage from "./features/products/ProductsPage";
 import AddProductPage from "./features/products/AddProductPage";
 import ProductProvider from "./context/ProductProvider";
+import EditProductPage from "./features/products/EditProductPage";
 
 const router = createBrowserRouter([
   { path: "/login", element: <p>Login</p> },
@@ -11,10 +12,14 @@ const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       { index: true, element: <p>DashboardHome</p> },
-      { path: "/dashboard/products", element: <ProductsPage /> },
+      { path: "/products", element: <ProductsPage /> },
       {
-        path: "/dashboard/products/addnewproduct",
+        path: "/products/addNewProduct",
         element: <AddProductPage />,
+      },
+      {
+        path: "/products/editProduct/:productId",
+        element: <EditProductPage />,
       },
     ],
   },

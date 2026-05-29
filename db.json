@@ -1,12 +1,36 @@
 {
   "products": [
     {
-      "name": "لپتاپ استوک HP",
-      "price": 50000000,
-      "stock": 1,
+      "name": "لپتاپ استوک Lenovo",
+      "price": 4252352,
+      "stock": 0,
       "category": "دیجیتال",
       "status": "available",
-      "id": "MXIJU9cxJsw"
+      "id": "rb4xsLJB8qM"
+    },
+    {
+      "name": "آیفون 16",
+      "price": 100000000,
+      "stock": 3,
+      "category": "دیجیتال",
+      "status": "available",
+      "id": "TffgJdcutVE"
+    },
+    {
+      "name": "لپتاپ استوک HP",
+      "price": 45325234,
+      "stock": 0,
+      "category": "جانبی",
+      "status": "available",
+      "id": "AQXU7PaLteU"
+    },
+    {
+      "name": "گوشی سامسونگ A56",
+      "price": 35453647,
+      "stock": 4,
+      "category": "جانبی",
+      "status": "unavailable",
+      "id": "4uO1gzq5lKo"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
