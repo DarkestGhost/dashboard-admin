@@ -16,12 +16,14 @@ const DeleteProductDialog = ({ isOpen, onClose, productName, onConfirm }) => {
             <span className="font-vazir_regular">حذف محصول</span>
           </DialogTitle>
         </DialogHeader>
+
         <div className="flex flex-col justify-center gap-y-4">
           <p className="font-vazir_bold">
             آیا از حذف محصول «{productName}» مطمئن هستید؟
           </p>
           <p className="font-vazir_medium">این عملیات قابل بازگشت نیست.</p>
         </div>
+
         <DialogFooter>
           <Button onClick={onClose} size={"md"} variant={"outline"}>
             لغو

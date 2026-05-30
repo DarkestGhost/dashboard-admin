@@ -14,6 +14,8 @@ const AddProductPage = () => {
 
   const handleAddProduct = useCallback(
     (data) => {
+      console.log(data);
+
       addNewProduct(data);
     },
     [addNewProduct],

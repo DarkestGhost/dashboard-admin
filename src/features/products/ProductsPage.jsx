@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Button from "../../components/ui/Button";
 import { ProductContext } from "../../context/ProductProvider";
 import DeleteProductDialog from "./components/DeleteProductDialog";
@@ -7,12 +7,7 @@ import DeleteProductDialog from "./components/DeleteProductDialog";
 const ProductsPage = () => {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const { products, loading, fetchProducts, removeProduct } =
-    useContext(ProductContext);
-
-  useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
+  const { products, loading, removeProduct } = useContext(ProductContext);
 
   const handleRemoveProduct = (product) => {
     setSelectedProduct(product);

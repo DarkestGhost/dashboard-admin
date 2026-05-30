@@ -18,7 +18,7 @@ const ProductForm = ({ formSubmit, initialValue, title }) => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    formSubmit(data);
+    await formSubmit(data);
     navigate("/dashboard/products");
   };
 

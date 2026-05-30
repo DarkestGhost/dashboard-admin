@@ -1,4 +1,4 @@
-import { createContext, useCallback, useReducer } from "react";
+import { createContext, useCallback, useEffect, useReducer } from "react";
 import { useHttp } from "../hooks/useHttp";
 
 const ProductContext = createContext({
@@ -49,13 +49,16 @@ const ProductProvider = ({ children }) => {
   const [productState, productDispatch] = useReducer(productReducer, {
     products: [],
   });
-
   const { error, loading, sendRequest } = useHttp();
 
   const fetchProducts = useCallback(async () => {
     const data = await sendRequest("http://localhost:3001/products");
     productDispatch({ type: "SET_PRODUCTS", payload: data });
   }, [sendRequest]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
   const addNewProduct = useCallback(
     async (data) => {

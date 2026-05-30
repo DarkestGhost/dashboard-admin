@@ -1,21 +1,4 @@
 {
-  "products": [
-    {
-      "name": "آیفون 16",
-      "price": 100000000,
-      "stock": 4,
-      "category": "دیجیتال",
-      "status": "available",
-      "id": "TffgJdcutVE"
-    },
-    {
-      "name": "لپتاپ استوک HP",
-      "price": 45325234,
-      "stock": 0,
-      "category": "جانبی",
-      "status": "available",
-      "id": "AQXU7PaLteU"
-    }
-  ],
+  "products": [],
   "$schema": "./node_modules/json-server/schema.json"
 }
