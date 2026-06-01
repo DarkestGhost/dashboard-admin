@@ -24,7 +24,7 @@ const ProductForm = ({ formSubmit, initialValue, title }) => {
 
   return (
     <div className="p-6">
-      <h2 className="text-xl font-vazir_bold text-sl, resetate-800 pb-10">
+      <h2 className="text-xl font-vazir_bold text-slate-800 pb-10">
         {title}
       </h2>
       <div className="flex justify-center items-center">

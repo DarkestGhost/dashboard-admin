@@ -12,7 +12,7 @@ const emptyValues = {
 const AddProductPage = () => {
   const { addNewProduct } = useContext(ProductContext);
 
-  const handleAddProduct = useCallback(
+  const  handleAddProduct = useCallback(
     (data) => {
       console.log(data);
 

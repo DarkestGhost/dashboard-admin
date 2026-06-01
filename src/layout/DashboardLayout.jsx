@@ -1,6 +1,16 @@
-import { Outlet, NavLink } from "react-router-dom";
+import Button from "@/components/ui/Button";
+import { AuthContext } from "@/features/auth/context/AuthProvider";
+import { useContext } from "react";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
 
 const DashboardLayout = () => {
+  const { logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  }
   return (
     <div className="flex h-screen bg-gray-100">
       <aside className="w-64 bg-slate-800 text-white p-4">
@@ -26,8 +36,9 @@ const DashboardLayout = () => {
         </nav>
       </aside>
       <main className="flex-1 overflow-y-auto">
-        <header className="h-16 bg-white shadow-md flex items-center px-6">
+        <header className="h-16 bg-white shadow-md flex items-center justify-between px-6">
           <h1 className="text-xl font-vazir_bold">علی عزیز خوش آمدید</h1>
+          <Button size={"md"} variant={"danger"} onClick={handleLogout}>خروج</Button>
         </header>
         <div className="p-6">
           <Outlet />

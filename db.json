@@ -1,4 +1,47 @@
 {
-  "products": [],
+  "users": [
+    {
+      "fullName": "علی آقازیارتی",
+      "email": "alihp6120@gmail.com",
+      "password": "qwertyuiopQWE123@",
+      "confirmPassword": "qwertyuiopQWE123@",
+      "accessToken": "155dab68-983e-4229-a3c6-379a103179ca",
+      "id": "smkdOWndnVI"
+    }
+  ],
+  "products": [
+    {
+      "name": "لپتاپ استوک HP",
+      "price": 83500000,
+      "stock": 3,
+      "category": "دیجیتال",
+      "status": "available",
+      "id": "PYv5TeGbQDM"
+    },
+    {
+      "name": "گوشی سامسونگ A56",
+      "price": 74000000,
+      "stock": 2,
+      "category": "دیجیتال",
+      "status": "available",
+      "id": "RYGHTeMbAmA"
+    },
+    {
+      "name": "کابل HDMI",
+      "price": 160000,
+      "stock": 6,
+      "category": "جانبی",
+      "status": "available",
+      "id": "2wLXi4D-5pw"
+    },
+    {
+      "name": "کابل تبدیل USB به type C",
+      "price": 99000,
+      "stock": 0,
+      "category": "جانبی",
+      "status": "unavailable",
+      "id": "X1e27tmlBvg"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }
