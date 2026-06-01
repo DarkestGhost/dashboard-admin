@@ -1,10 +1,13 @@
-import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
+import { useState } from "react";
 
-const AuthForm = ({ type, title, formSubmit }) => {
-    const { register, handleSubmit, formState: { errors, isValid, isSubmitting } } = useForm({ mode: "onTouched" });
+const AuthForm = ({ type, title, formSubmit, schema }) => {
+    const [submitError, setSubmitError] = useState(null);
+    const { register, handleSubmit, formState: { errors, isValid, isSubmitting } } = useForm({ mode: "onTouched", resolver: zodResolver(schema) });
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
@@ -12,7 +15,7 @@ const AuthForm = ({ type, title, formSubmit }) => {
             await formSubmit(data);
             navigate("/dashboard");
         } catch (error) {
-            console.log(error);
+            setSubmitError(error.message);
         }
     };
 
@@ -21,47 +24,18 @@ const AuthForm = ({ type, title, formSubmit }) => {
             <form onSubmit={handleSubmit(onSubmit)} className="w-1/4 bg-white shadow-md overflow-hidden rounded-lg p-8 space-y-8">
                 <h2 className="text-xl text-center font-vazir_bold text-slate-800">{title}</h2>
 
-                {type === "signup" && <Input id={"fullName"} label={"نام و نام خانوادگی"} type={"text"} error={errors.fullName} {...register("fullName", {
-                    required: "نام و نام خانوادگی الزامی است.",
-                    pattern: {
-                        value: /^[آ-ی\s]+$/,
-                        message: "فقط حروف فارسی مجاز است.",
-                    },
-                    minLength: {
-                        value: 3,
-                        message: "حداقل ۳ کاراکتر وارد کنید.",
-                    },
-                    maxLength: {
-                        value: 50,
-                        message: "حداکثر 50 کاراکتر وارد کنید.",
-                    }
-                })} />}
+                {type === "signup" && <Input id={"fullName"} label={"نام و نام خانوادگی"} type={"text"} error={errors.fullName} {...register("fullName")} />}
 
-                <Input id={"email"} label={"ایمیل"} type={"email"} error={errors.email} {...register("email", {
-                    required: "ایمیل الزامی است.",
-                    pattern: {
-                        value: /^(?!.*\.\.)[A-Za-z0-9._%+-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/,
-                        message: "ایمیل معتبر نیست."
-                    }
-                })} />
-                <Input id={"password"} label={"رمز عبور"} type={"password"} error={errors.password} {...register("password", {
-                    required: "رمز عبور الزامی است.",
-                    pattern: {
-                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                        message: "رمز عبور باید شامل کاراکتر بزرگ، کاراکتر کوچک، عدد و کاراکتر خاص باشد."
-                    },
-                    minLength: {
-                        value: 6,
-                        message: "رمز عبور حداقل باید 6 کاراکتر باشد."
-                    }
-                })} />
+                <Input id={"email"} label={"ایمیل"} type={"email"} error={errors.email} {...register("email")} />
 
-                {type === "signup" && <Input id={"confirmPassword"} label={"تکرار رمز عبور"} type={"password"} error={errors.confirmPassword} {...register("confirmPassword", {
-                    required: "تکرار رمز عبور الزامی است.",
-                })} />}
+                <Input id={"password"} label={"رمز عبور"} type={"password"} error={errors.password} {...register("password")} />
+
+                {type === "signup" && <Input id={"confirmPassword"} label={"تکرار رمز عبور"} type={"password"} error={errors.confirmPassword} {...register("confirmPassword")} />}
+
+                {submitError && <p className="mb-2 text-sm text-center font-vazir_regular text-red-500">{submitError}</p>}
 
                 <div className="flex flex-col items-center justify-center gap-y-2.5">
-                    <Button size={"md"} className="w-full" variant={"success"} disabled={!isValid}>
+                    <Button size={"md"} className="w-full" variant={"success"} disabled={!isValid || submitError}>
                         {type === "login" ? isSubmitting ? "در حال ورود..." : "ورود" : isSubmitting ? "درحال ثبت نام..." : "ثبت نام"}
                     </Button>
                     <p className="text-sm font-vazir_regular">

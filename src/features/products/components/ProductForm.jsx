@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "@/components/ui/Input";
 import Select from "@/components/ui/Select";
 import Button from "@/components/ui/Button";
+import { productSchema } from "../validations/productSchema";
 
 const categoryOptions = [
   { value: "digital", label: "دیجیتال" },
@@ -14,7 +16,7 @@ const ProductForm = ({ formSubmit, initialValue, title }) => {
     register,
     handleSubmit,
     formState: { errors, isValid, isSubmitting, isDirty },
-  } = useForm({ mode: "onTouched", defaultValues: initialValue });
+  } = useForm({ mode: "onTouched", defaultValues: initialValue, resolver: zodResolver(productSchema) });
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
@@ -37,9 +39,7 @@ const ProductForm = ({ formSubmit, initialValue, title }) => {
             label={"عنوان محصول"}
             type="text"
             error={errors.name}
-            {...register("name", {
-              required: "نام محصول الزامی است.",
-            })}
+            {...register("name")}
           />
           <div className="flex items-center justify-center gap-x-4">
             <Input
@@ -47,11 +47,7 @@ const ProductForm = ({ formSubmit, initialValue, title }) => {
               label={"قیمت (تومان)"}
               type="number"
               error={errors.price}
-              {...register("price", {
-                required: "قیمت الزامی است.",
-                valueAsNumber: true,
-                min: { value: 0, message: "قیمت نمیتواند منفی باشد." },
-              })}
+              {...register("price")}
             />
 
             <Input
@@ -59,11 +55,7 @@ const ProductForm = ({ formSubmit, initialValue, title }) => {
               label={"موجودی"}
               type="number"
               error={errors.stock}
-              {...register("stock", {
-                required: "موجودی الزامی است.",
-                valueAsNumber: true,
-                min: { value: 0, message: "موجودی نمیتواند منفی باشد." },
-              })}
+              {...register("stock")}
             />
           </div>
 
@@ -72,7 +64,7 @@ const ProductForm = ({ formSubmit, initialValue, title }) => {
             label={"دسته بندی"}
             options={categoryOptions}
             error={errors.category}
-            {...register("category", { required: "دسته بندی الزامی است." })}
+            {...register("category")}
           />
 
           <p className="flex justify-end items-center gap-x-2 text-sm">
@@ -86,7 +78,7 @@ const ProductForm = ({ formSubmit, initialValue, title }) => {
             <Button
               size={"md"}
               variant={"success"}
-              disabled={!isValid || !isDirty}
+              disabled={!isValid || !isDirty || isSubmitting}
             >
               {isSubmitting ? "در حال ثبت.." : "ثبت محصول"}
             </Button>

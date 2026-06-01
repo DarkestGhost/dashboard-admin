@@ -3,10 +3,10 @@
     {
       "fullName": "علی آقازیارتی",
       "email": "alihp6120@gmail.com",
-      "password": "qwertyuiopQWE123@",
-      "confirmPassword": "qwertyuiopQWE123@",
-      "accessToken": "155dab68-983e-4229-a3c6-379a103179ca",
-      "id": "smkdOWndnVI"
+      "password": "AliMahdi@8593",
+      "confirmPassword": "AliMahdi@8593",
+      "accessToken": "23063397-b7a0-4d19-9235-9058b345c471",
+      "id": "cF_V7AICJPo"
     }
   ],
   "products": [
@@ -20,27 +20,19 @@
     },
     {
       "name": "گوشی سامسونگ A56",
-      "price": 74000000,
-      "stock": 2,
+      "price": "74000000",
+      "stock": "0",
       "category": "دیجیتال",
       "status": "available",
       "id": "RYGHTeMbAmA"
     },
     {
       "name": "کابل HDMI",
-      "price": 160000,
-      "stock": 6,
-      "category": "جانبی",
+      "price": "160000",
+      "stock": "1",
+      "category": "دیجیتال",
       "status": "available",
       "id": "2wLXi4D-5pw"
-    },
-    {
-      "name": "کابل تبدیل USB به type C",
-      "price": 99000,
-      "stock": 0,
-      "category": "جانبی",
-      "status": "unavailable",
-      "id": "X1e27tmlBvg"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

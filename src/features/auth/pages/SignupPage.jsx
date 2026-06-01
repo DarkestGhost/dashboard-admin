@@ -1,6 +1,7 @@
 import { useCallback, useContext } from "react";
 import AuthForm from "../components/AuthForm";
 import { AuthContext } from "../context/AuthProvider";
+import { signupSchema } from "../validations/signupSchema";
 
 const SignupPage = () => {
     const { register } = useContext(AuthContext);
@@ -10,7 +11,7 @@ const SignupPage = () => {
         [register]
     );
 
-    return <AuthForm type={"signup"} title={"ثبت نام در سایت"} formSubmit={handleRegisterToSite} />
+    return <AuthForm type={"signup"} title={"ثبت نام در سایت"} formSubmit={handleRegisterToSite} schema={signupSchema} />
 
 };
 
