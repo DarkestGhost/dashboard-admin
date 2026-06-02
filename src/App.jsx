@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import DashboardLayout from "./layout/DashboardLayout";
 import ProductsPage from "./features/products/ProductsPage";
 import AddProductPage from "./features/products/AddProductPage";
-import ProductProvider from "./context/ProductProvider";
 import EditProductPage from "./features/products/EditProductPage";
 import AuthProvider from "./features/auth/context/AuthProvider";
 import LoginPage from "./features/auth/pages/LoginPage";
@@ -36,13 +36,15 @@ const router = createBrowserRouter([
   { path: "*", element: <p className="text-center">Not Found Page</p> },
 ]);
 
+const queryClient = new QueryClient();
+
 const App = () => {
   return (
-    <AuthProvider>
-      <ProductProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
         <RouterProvider router={router} />
-      </ProductProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 };
 

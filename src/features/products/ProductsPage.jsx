@@ -1,26 +1,44 @@
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Button from "../../components/ui/Button";
-import { ProductContext } from "../../context/ProductProvider";
 import DeleteProductDialog from "./components/DeleteProductDialog";
+import { fetchProducts, removeProduct } from "@/services/productsApi";
 
 const ProductsPage = () => {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const { products, loading, removeProduct } = useContext(ProductContext);
+
+  const queryClient = useQueryClient();
+
+  const { data: products, isPending, isError, error } = useQuery({
+    queryKey: ["products"],
+    queryFn: fetchProducts
+  });
+
+  const { mutate } = useMutation({
+    mutationFn: removeProduct,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    }
+  })
+
+
 
   const handleRemoveProduct = (product) => {
     setSelectedProduct(product);
     setIsDeleteOpen(true);
   };
 
-  const handleConfirmDelete = async () => {
-    removeProduct(selectedProduct?.id);
+  const handleConfirmDelete = () => {
+    mutate(selectedProduct?.id);
     setIsDeleteOpen(false);
     setSelectedProduct(null);
   };
 
-  if (loading) return <p>در حال دریافت محصولات ...</p>;
+  if (isPending) return <p>در حال دریافت محصولات ...</p>;
+
+  if (isError) return <p>{error.message}</p>;
 
   return (
     <div className="p-6">
@@ -56,7 +74,7 @@ const ProductsPage = () => {
                   <td className="p-4">{product.name}</td>
                   <td className="p-4">{product.category}</td>
                   <td className="p-4">
-                    {product.price.toLocaleString("fa-IR")} تومان
+                    {Number(product.price).toLocaleString("fa-IR")} تومان
                   </td>
                   <td className={"p-4"}>
                     <span

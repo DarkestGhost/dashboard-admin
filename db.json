@@ -12,11 +12,12 @@
   "products": [
     {
       "name": "لپتاپ استوک HP",
-      "price": 83500000,
-      "stock": 3,
+      "price": "242542454",
+      "stock": "3",
       "category": "دیجیتال",
       "status": "available",
-      "id": "PYv5TeGbQDM"
+      "id": "PYv5TeGbQDM",
+      "client": {}
     },
     {
       "name": "گوشی سامسونگ A56",
@@ -24,15 +25,16 @@
       "stock": "0",
       "category": "دیجیتال",
       "status": "available",
-      "id": "RYGHTeMbAmA"
+      "id": "RYGHTeMbAmA",
+      "client": {}
     },
     {
-      "name": "کابل HDMI",
-      "price": "160000",
+      "name": "لپتاپ استوک Lenovo",
+      "price": "24523542",
       "stock": "1",
       "category": "دیجیتال",
       "status": "available",
-      "id": "2wLXi4D-5pw"
+      "id": "26kP9lOmTaE"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
