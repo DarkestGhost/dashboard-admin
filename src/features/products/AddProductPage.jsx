@@ -2,8 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import ProductForm from "./components/ProductForm";
 import { addNewProduct } from "@/services/productsApi";
-import ErrorMessage from "@/components/ui/ErrorMessage";
-import { useState } from "react";
+import { toast } from "sonner";
 
 const emptyValues = {
   name: "",
@@ -13,26 +12,28 @@ const emptyValues = {
 };
 
 const AddProductPage = () => {
-  const [lastData, setLastData] = useState(null);
   const navigate = useNavigate();
+
   const queryClient = useQueryClient();
-  const { mutate, isError, error } = useMutation({
+
+  const { mutate } = useMutation({
     mutationFn: addNewProduct,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
+
+      toast.success("محصول با موفقیت اضافه شد.");
+
       navigate("/dashboard/products");
+    },
+    onError: (error) => {
+      toast.error(error.message);
     }
   });
 
-  const handleAddProduct = (data) => {
-    setLastData(data);
-    mutate(data);
-  }
+  const handleAddProduct = (data) => mutate(data);
 
   return (
     <>
-      {isError && <ErrorMessage message={error.message} onRetry={() => mutate(lastData)} />}
-
       <ProductForm
         formSubmit={handleAddProduct}
         initialValue={emptyValues}

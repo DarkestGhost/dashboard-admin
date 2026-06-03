@@ -31,18 +31,18 @@
     {
       "name": "لپتاپ استوک Lenovo",
       "price": "2452498",
-      "stock": "0",
+      "stock": "2",
       "category": "دیجیتال",
       "status": "available",
       "id": "26kP9lOmTaE"
     },
     {
-      "name": "کابل HDMI",
-      "price": "241432",
+      "name": "گوشی سامسونگ A30",
+      "price": "2700000",
       "stock": "1",
-      "category": "جانبی",
-      "status": "available",
-      "id": "PSOdMDDPqLk"
+      "category": "دیجیتال",
+      "status": "unavailable",
+      "id": "CD18-YQpdoY"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

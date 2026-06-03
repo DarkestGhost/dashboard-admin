@@ -9,6 +9,7 @@ import LoginPage from "./features/auth/pages/LoginPage";
 import SignupPage from "./features/auth/pages/SignupPage";
 import ProtectedRoute from "./components/routes/ProtectedRoute";
 import RootRedirect from "./components/routes/RootRedirect";
+import { Toaster } from "sonner";
 
 const router = createBrowserRouter([
   { path: "/", element: <RootRedirect /> },
@@ -43,6 +44,11 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <RouterProvider router={router} />
+        <Toaster richColors position="top-center" closeButton toastOptions={{
+          classNames: {
+            toast: "font-vazir_medium",
+          }
+        }} />
       </AuthProvider>
     </QueryClientProvider>
   );

@@ -6,6 +6,7 @@ import DeleteProductDialog from "./components/DeleteProductDialog";
 import { fetchProducts, removeProduct } from "@/services/productsApi";
 import Loading from "@/components/ui/Loading";
 import ErrorMessage from "@/components/ui/ErrorMessage";
+import { toast } from "sonner";
 
 const ProductsPage = () => {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -22,6 +23,10 @@ const ProductsPage = () => {
     mutationFn: removeProduct,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
+      toast.success("محصول حذف شد.");
+    },
+    onError: (error) => {
+      toast.error(error.message);
     }
   })
 
