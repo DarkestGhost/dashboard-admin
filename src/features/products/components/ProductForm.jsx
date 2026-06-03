@@ -11,17 +11,16 @@ const categoryOptions = [
   { value: "accessories", label: "جانبی" },
 ];
 
-const ProductForm = ({ formSubmit, initialValue, title }) => {
+const ProductForm = ({ formSubmit, initialValue, title, isMutating }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, isSubmitting, isDirty },
+    formState: { errors, isValid, isDirty },
   } = useForm({ mode: "onTouched", defaultValues: initialValue, resolver: zodResolver(productSchema) });
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     await formSubmit(data);
-    navigate("/dashboard/products");
   };
 
   return (
@@ -71,6 +70,7 @@ const ProductForm = ({ formSubmit, initialValue, title }) => {
             <Button
               size={"md"}
               variant={"danger"}
+              type="button"
               onClick={() => navigate("/dashboard/products")}
             >
               لغو
@@ -78,9 +78,10 @@ const ProductForm = ({ formSubmit, initialValue, title }) => {
             <Button
               size={"md"}
               variant={"success"}
-              disabled={!isValid || !isDirty || isSubmitting}
+              type="submit"
+              disabled={!isValid || !isDirty || isMutating}
             >
-              {isSubmitting ? "در حال ثبت.." : "ثبت محصول"}
+              {isMutating ? "در حال ثبت.." : "ثبت محصول"}
             </Button>
           </p>
         </form>

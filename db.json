@@ -30,11 +30,19 @@
     },
     {
       "name": "لپتاپ استوک Lenovo",
-      "price": "24523542",
-      "stock": "1",
+      "price": "2452498",
+      "stock": "0",
       "category": "دیجیتال",
       "status": "available",
       "id": "26kP9lOmTaE"
+    },
+    {
+      "name": "کابل HDMI",
+      "price": "241432",
+      "stock": "1",
+      "category": "جانبی",
+      "status": "available",
+      "id": "PSOdMDDPqLk"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

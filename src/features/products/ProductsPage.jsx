@@ -4,6 +4,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Button from "../../components/ui/Button";
 import DeleteProductDialog from "./components/DeleteProductDialog";
 import { fetchProducts, removeProduct } from "@/services/productsApi";
+import Loading from "@/components/ui/Loading";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 
 const ProductsPage = () => {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -11,9 +13,9 @@ const ProductsPage = () => {
 
   const queryClient = useQueryClient();
 
-  const { data: products, isPending, isError, error } = useQuery({
+  const { data: products, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["products"],
-    queryFn: fetchProducts
+    queryFn: fetchProducts,
   });
 
   const { mutate } = useMutation({
@@ -22,8 +24,6 @@ const ProductsPage = () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
     }
   })
-
-
 
   const handleRemoveProduct = (product) => {
     setSelectedProduct(product);
@@ -36,9 +36,9 @@ const ProductsPage = () => {
     setSelectedProduct(null);
   };
 
-  if (isPending) return <p>در حال دریافت محصولات ...</p>;
+  if (isLoading) return <Loading message="در حال دریافت محصولات..." />;
 
-  if (isError) return <p>{error.message}</p>;
+  if (isError) return <ErrorMessage message={error.message} onRetry={refetch} />;
 
   return (
     <div className="p-6">

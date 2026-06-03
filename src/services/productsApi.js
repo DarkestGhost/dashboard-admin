@@ -3,13 +3,17 @@ const BASE_URL = "http://localhost:3001";
 export const fetchProducts = async () => {
   const response = await fetch(`${BASE_URL}/products`);
 
-  if (!response.ok) {
-    throw new Error("خطایی در دریافت محصولات رخ داد.");
-  }
+  if (!response.ok) throw new Error("خطایی در دریافت محصولات رخ داد.");
 
-  const data = await response.json();
+  return response.json();
+};
 
-  return data;
+export const fetchProduct = async (id) => {
+  const response = await fetch(`${BASE_URL}/products/${id}`);
+
+  if (!response.ok) throw new Error("خطایی در دریافت محصول رخ داد.");
+
+  return response.json();
 };
 
 export const addNewProduct = async (productData) => {
@@ -22,13 +26,9 @@ export const addNewProduct = async (productData) => {
     }),
   });
 
-  if (!response.ok) {
-    throw new Error("خطایی در اضافه کردن محصول جدید رخ داد.");
-  }
+  if (!response.ok) throw new Error("خطایی در اضافه کردن محصول جدید رخ داد.");
 
-  const data = await response.json();
-
-  return data;
+  return response.json();
 };
 
 export const removeProduct = async (id) => {
@@ -36,13 +36,9 @@ export const removeProduct = async (id) => {
     method: "DELETE",
   });
 
-  if (!response.ok) {
-    throw new Error("خطایی در حذف کردن محصول رخ داد.");
-  }
+  if (!response.ok) throw new Error("خطایی در حذف کردن محصول رخ داد.");
 
-  const data = await response.json();
-
-  return data;
+  return response.json();
 };
 
 export const editProduct = async ({ id, ...productData }) => {
@@ -52,11 +48,7 @@ export const editProduct = async ({ id, ...productData }) => {
     body: JSON.stringify(productData),
   });
 
-  if (!response.ok) {
-    throw new Error("خطایی در ویرایش محصول رخ داد.");
-  }
+  if (!response.ok) throw new Error("خطایی در ویرایش محصول رخ داد.");
 
-  const data = await response.json();
-
-  return data;
+  return response.json();
 };
