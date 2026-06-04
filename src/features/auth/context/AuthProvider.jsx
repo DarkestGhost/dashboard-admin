@@ -13,32 +13,40 @@ const AuthContext = createContext({
 
 
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(() => {
+        const storeUser = localStorage.getItem("user");
+        return storeUser ? JSON.parse(storeUser) : null;
+    });
     const [token, setToken] = useState(() => {
         return getAuthToken() || null;
     });
 
     const register = useCallback(async (userData) => {
         const response = await registerUser(userData);
-        setUser(response);
         setToken(response.accessToken);
-
         setAuthToken(response.accessToken);
+
+        const safeUser = { id: response.id, name: response.fullName };
+        setUser(safeUser);
+        localStorage.setItem("user", JSON.stringify(safeUser));
     }, []);
 
     const login = useCallback(async (userData) => {
         const response = await loginUser(userData);
-        setUser(response);
         setToken(response.accessToken);
-
         setAuthToken(response.accessToken);
+
+        const safeUser = { id: response.id, name: response.fullName };
+        setUser(safeUser);
+        localStorage.setItem("user", JSON.stringify(safeUser));
     }, []);
 
     const logout = useCallback(() => {
         setToken(null);
         setUser(null);
-
         removeAuthtoken();
+
+        localStorage.removeItem("user");
     }, [])
 
     const isAuthenticated = !!token;

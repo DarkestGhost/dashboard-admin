@@ -37,12 +37,12 @@
       "id": "26kP9lOmTaE"
     },
     {
-      "name": "گوشی سامسونگ A30",
-      "price": "2700000",
-      "stock": "1",
-      "category": "دیجیتال",
-      "status": "unavailable",
-      "id": "CD18-YQpdoY"
+      "name": "موس TSCO",
+      "price": "2800000",
+      "stock": "0",
+      "category": "جانبی",
+      "status": "available",
+      "id": "W0YBTTGmOss"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

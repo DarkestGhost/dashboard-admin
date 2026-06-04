@@ -7,6 +7,7 @@ import { fetchProducts, removeProduct } from "@/services/productsApi";
 import Loading from "@/components/ui/Loading";
 import ErrorMessage from "@/components/ui/ErrorMessage";
 import { toast } from "sonner";
+import { HiPencil, HiPlus, HiTrash } from "react-icons/hi2";
 
 const ProductsPage = () => {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -23,7 +24,7 @@ const ProductsPage = () => {
     mutationFn: removeProduct,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
-      toast.success("محصول حذف شد.");
+      toast.success("محصول با موفقیت حذف شد.");
     },
     onError: (error) => {
       toast.error(error.message);
@@ -46,21 +47,22 @@ const ProductsPage = () => {
   if (isError) return <ErrorMessage message={error.message} onRetry={refetch} />;
 
   return (
-    <div className="p-6">
-      <div className="flex items-center justify-between mb-8">
+    <div className="p-4 sm:p-6">
+      <div className="flex flex-col gap-4 md:flex-row items-center md:justify-between mb-8">
         <h2 className="text-xl font-vazir_bold text-slate-800">
           مدیریت محصولات
         </h2>
         <Link to={"/dashboard/products/addNewProduct"}>
-          <Button size={"md"} variant={"outline"}>
-            افزودن محصول جدید
+          <Button size={"md"} variant={"outline"} className="w-full sm:w-auto flex items-center gap-1 group">
+            <HiPlus className="w-4 h-4 text-blue-700 group-hover:text-white transition-colors" />
+            <span>افزودن محصول جدید</span>
           </Button>
         </Link>
       </div>
 
       {products.length > 0 ? (
-        <div className="bg-white overflow-hidden rounded-lg shadow-md">
-          <table className="w-full text-right">
+        <div className="bg-white overflow-x-auto rounded-lg shadow-md">
+          <table className="min-w-max w-full text-right">
             <thead>
               <tr className="bg-slate-200 font-vazir_medium">
                 <th className="text-slate-800 p-4">نام محصول</th>
@@ -90,16 +92,19 @@ const ProductsPage = () => {
                   </td>
                   <td className="p-4 flex items-center gap-x-2">
                     <Link to={`/dashboard/products/editProduct/${product.id}`}>
-                      <Button size={"sm"} variant={"primary"}>
-                        ویرایش
+                      <Button size={"sm"} variant={"primary"} className="flex items-center gap-1 group">
+                        <HiPencil className="w-4 h-4 text-blue-500 group-hover:text-blue-600 transition-colors" />
+                        <span>ویرایش</span>
                       </Button>
                     </Link>
                     <Button
                       size={"sm"}
                       variant={"danger"}
+                      className="flex items-center gap-1 group"
                       onClick={() => handleRemoveProduct(product)}
                     >
-                      حذف
+                      <HiTrash className="w-4 h-4 text-red-500 group-hover:text-red-600 transition-colors" />
+                      <span>حذف</span>
                     </Button>
                   </td>
                 </tr>

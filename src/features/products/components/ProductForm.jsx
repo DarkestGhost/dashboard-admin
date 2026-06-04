@@ -24,15 +24,15 @@ const ProductForm = ({ formSubmit, initialValue, title, isMutating }) => {
   };
 
   return (
-    <div className="p-6">
-      <h2 className="text-xl font-vazir_bold text-slate-800 pb-10">
+    <div className="p-4 sm:p-6">
+      <h2 className="text-xl font-vazir_bold text-slate-800 pb-6 sm:pb-10">
         {title}
       </h2>
       <div className="flex justify-center items-center">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-2/5 bg-white shadow-md overflow-hidden rounded-lg p-8 space-y-8"
-        >
+          className="w-full sm:w-4/5 md:w-3/5 lg:w-2/5 bg-white shadow-md overflow-hidden rounded-lg p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
+
           <Input
             id={"name"}
             label={"عنوان محصول"}
@@ -40,7 +40,7 @@ const ProductForm = ({ formSubmit, initialValue, title, isMutating }) => {
             error={errors.name}
             {...register("name")}
           />
-          <div className="flex items-center justify-center gap-x-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Input
               id={"price"}
               label={"قیمت (تومان)"}
@@ -66,11 +66,12 @@ const ProductForm = ({ formSubmit, initialValue, title, isMutating }) => {
             {...register("category")}
           />
 
-          <p className="flex justify-end items-center gap-x-2 text-sm">
+          <div className="flex flex-col-reverse sm:flex-row justify-end items-stretch sm:items-center gap-3 text-sm">
             <Button
               size={"md"}
               variant={"danger"}
               type="button"
+              className="w-full sm:w-auto"
               onClick={() => navigate("/dashboard/products")}
             >
               لغو
@@ -79,11 +80,12 @@ const ProductForm = ({ formSubmit, initialValue, title, isMutating }) => {
               size={"md"}
               variant={"success"}
               type="submit"
+              className="w-full sm:w-auto"
               disabled={!isValid || !isDirty || isMutating}
             >
               {isMutating ? "در حال ثبت.." : "ثبت محصول"}
             </Button>
-          </p>
+          </div>
         </form>
       </div>
     </div>

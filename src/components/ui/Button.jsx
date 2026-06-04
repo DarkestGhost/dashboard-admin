@@ -4,11 +4,10 @@ const Button = ({ children, variant, size, className = "", ...props }) => {
 
   const variants = {
     primary: "bg-blue-100 text-blue-600 hover:bg-blue-200 hover:text-blue-700",
-    success:
-      "bg-green-100 text-green-600 hover:bg-green-200 hover:text-green-700",
+    success: "bg-green-100 text-green-600 hover:bg-green-200 hover:text-green-700",
     danger: "bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700",
-    outline:
-      "border border-blue-600 text-blue-700 hover:bg-blue-600 hover:text-white",
+    outline: "border border-blue-600 text-blue-700 hover:bg-blue-600 hover:text-white",
+    ghost: "border border-slate-300 text-slate-600 hover:bg-slate-100 hover:text-slate-800"
   };
 
   const sizes = {

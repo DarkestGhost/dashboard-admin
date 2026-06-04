@@ -1,6 +1,6 @@
 const Input = ({ id, label, error, className = "", ...props }) => {
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <label
         htmlFor={id}
         className="block text-sm font-vazir_regular pb-2 mr-2"
