@@ -25,13 +25,13 @@ const ProductForm = ({ formSubmit, initialValue, title, isMutating }) => {
 
   return (
     <div className="p-4 sm:p-6">
-      <h2 className="text-xl font-vazir_bold text-slate-800 pb-6 sm:pb-10">
+      <h2 className="text-xl font-vazir_bold text-zinc-800 dark:text-zinc-100 pb-6 sm:pb-10 transition-colors duration-300 ease-linear">
         {title}
       </h2>
       <div className="flex justify-center items-center">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-full sm:w-4/5 md:w-3/5 lg:w-2/5 bg-white shadow-md overflow-hidden rounded-lg p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
+          className="w-full sm:w-4/5 md:w-3/5 lg:w-2/5 bg-white dark:bg-zinc-800 shadow-md overflow-hidden rounded-lg p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8 transition-all duration-300 ease-linear">
 
           <Input
             id={"name"}

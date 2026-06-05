@@ -6,6 +6,15 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard Admin</title>
+  <script>
+    const theme = localStorage.getItem("theme");
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+      document.documentElement.style.backgroundColor = "#0f172a";
+    } else {
+      document.documentElement.style.backgroundColor = "#f1f5f9";
+    }
+  </script>
 </head>
 
 <body>

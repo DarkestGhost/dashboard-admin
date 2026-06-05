@@ -13,7 +13,7 @@
     {
       "name": "لپتاپ استوک HP",
       "price": "242542454",
-      "stock": "3",
+      "stock": "4",
       "category": "دیجیتال",
       "status": "available",
       "id": "PYv5TeGbQDM",
@@ -31,18 +31,10 @@
     {
       "name": "لپتاپ استوک Lenovo",
       "price": "2452498",
-      "stock": "2",
+      "stock": "3",
       "category": "دیجیتال",
       "status": "available",
       "id": "26kP9lOmTaE"
-    },
-    {
-      "name": "موس TSCO",
-      "price": "2800000",
-      "stock": "0",
-      "category": "جانبی",
-      "status": "available",
-      "id": "W0YBTTGmOss"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

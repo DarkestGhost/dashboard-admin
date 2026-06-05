@@ -5,6 +5,7 @@ import ProductsPage from "./features/products/ProductsPage";
 import AddProductPage from "./features/products/AddProductPage";
 import EditProductPage from "./features/products/EditProductPage";
 import AuthProvider from "./features/auth/context/AuthProvider";
+import ThemeProvider from "./context/theme/ThemeProvider";
 import LoginPage from "./features/auth/pages/LoginPage";
 import SignupPage from "./features/auth/pages/SignupPage";
 import ProtectedRoute from "./components/routes/ProtectedRoute";
@@ -41,16 +42,18 @@ const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <Toaster richColors position="top-center" closeButton toastOptions={{
-          classNames: {
-            toast: "font-vazir_medium",
-          }
-        }} />
-      </QueryClientProvider>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+          <Toaster richColors position="top-center" closeButton toastOptions={{
+            classNames: {
+              toast: "font-vazir_medium",
+            }
+          }} />
+        </QueryClientProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 };
 

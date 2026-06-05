@@ -20,9 +20,9 @@ const AuthForm = ({ type, title, formSubmit, schema }) => {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4 py-8">
-            <form onSubmit={handleSubmit(onSubmit)} onChange={() => setSubmitError(null)} className="w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 bg-white shadow-md overflow-hidden rounded-lg p-6 sm:p-8 space-y-6 sm:space-y-8">
-                <h2 className="text-xl text-center font-vazir_bold text-slate-800">{title}</h2>
+        <div className="flex justify-center items-center min-h-screen bg-zinc-100 dark:bg-zinc-900 px-4 py-8 transition-all duration-300 ease-linear">
+            <form onSubmit={handleSubmit(onSubmit)} onChange={() => setSubmitError(null)} className="w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 bg-white dark:bg-zinc-800 shadow-md overflow-hidden rounded-lg p-6 sm:p-8 space-y-6 sm:space-y-8 transition-all duration-300 ease-linear">
+                <h2 className="text-xl text-center font-vazir_bold text-zinc-800 dark:text-zinc-100">{title}</h2>
 
                 {type === "signup" && <Input id={"fullName"} label={"نام و نام خانوادگی"} type={"text"} error={errors.fullName} {...register("fullName")} />}
 
@@ -32,7 +32,7 @@ const AuthForm = ({ type, title, formSubmit, schema }) => {
 
                 {type === "signup" && <Input id={"confirmPassword"} label={"تکرار رمز عبور"} type={"password"} error={errors.confirmPassword} {...register("confirmPassword")} />}
 
-                {submitError && <p className="mb-2 text-sm text-center font-vazir_regular text-red-500">{submitError}</p>}
+                {submitError && <p className="mb-2 text-sm text-center font-vazir_regular text-red-500 dark:text-red-400">{submitError}</p>}
 
                 <div className="flex flex-col items-center justify-center gap-y-2.5">
                     <Button size={"md"} className="w-full" variant={"success"} disabled={!isValid || isSubmitting || submitError}>

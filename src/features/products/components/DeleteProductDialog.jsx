@@ -14,18 +14,18 @@ const DeleteProductDialog = ({ isOpen, onClose, productName, onConfirm }) => {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <span className="text-lg font-vazir_bold flex items-center gap-1 leading-none">
-              <HiTrash className="w-5 h-5 text-red-500 shrink-0" />
+            <span className="text-lg font-vazir_bold flex items-center gap-2">
+              <HiTrash className="w-5 h-5 text-red-500" />
               <span>حذف محصول</span>
             </span>
           </DialogTitle>
         </DialogHeader>
 
         <div className="flex flex-col justify-center gap-y-4 py-2">
-          <p className="font-vazir_bold text-slate-700">
+          <p className="font-vazir_bold text-zinc-700 dark:text-zinc-200">
             میخوای محصول «{productName}» رو حذف کنی؟
           </p>
-          <p className="font-vazir_medium text-sm text-red-500">
+          <p className="font-vazir_medium text-sm text-red-500 dark:text-red-400">
             ⚠️ این عملیات قابل بازگشت نیست.
           </p>
         </div>
