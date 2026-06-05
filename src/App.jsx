@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import DashboardLayout from "./layout/DashboardLayout";
+import DashboardPage from "./features/dashboard/pages/DashboardPage";
 import ProductsPage from "./features/products/ProductsPage";
 import AddProductPage from "./features/products/AddProductPage";
 import EditProductPage from "./features/products/EditProductPage";
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
         <DashboardLayout />
       </ProtectedRoute>,
     children: [
-      { index: true, element: <p>DashboardHome</p> },
+      { index: true, element: <DashboardPage /> },
       { path: "products", element: <ProductsPage /> },
       {
         path: "products/addNewProduct",

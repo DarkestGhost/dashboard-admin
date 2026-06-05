@@ -23,6 +23,7 @@ export const addNewProduct = async (productData) => {
     body: JSON.stringify({
       ...productData,
       status: productData.stock > 0 ? "available" : "unavailable",
+      createdAt: new Date().toISOString(),
     }),
   });
 
