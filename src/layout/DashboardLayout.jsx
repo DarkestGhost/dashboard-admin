@@ -4,14 +4,21 @@ import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import Button from "@/components/ui/Button";
 import { HiBars3, HiArrowRightOnRectangle } from "react-icons/hi2";
 import { ThemeContext } from "@/context/theme/ThemeProvider";
+import LogoutDialog from "./components/LogoutDialog";
 
 const DashboardLayout = () => {
+  const [isLogoutOpen, setIsLogoutOpen] = useState(false);
   const { user, logout } = useContext(AuthContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleLogout = () => {
+    setIsLogoutOpen(true);
+  }
+
+  const handleConfirmLogout = () => {
+    setIsLogoutOpen(false);
     logout();
     navigate("/login");
   }
@@ -69,6 +76,11 @@ const DashboardLayout = () => {
           <Outlet />
         </div>
       </main>
+      <LogoutDialog
+        isOpen={isLogoutOpen}
+        onClose={() => setIsLogoutOpen(false)}
+        onConfirm={handleConfirmLogout}
+      />
     </div>
   );
 };

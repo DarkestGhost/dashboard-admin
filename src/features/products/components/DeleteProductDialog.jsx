@@ -3,6 +3,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
 import Button from "@/components/ui/Button";
@@ -20,16 +21,16 @@ const DeleteProductDialog = ({ isOpen, onClose, productName, onConfirm }) => {
             </span>
           </DialogTitle>
         </DialogHeader>
-
-        <div className="flex flex-col justify-center gap-y-4 py-2">
-          <p className="font-vazir_bold text-zinc-700 dark:text-zinc-200">
-            میخوای محصول «{productName}» رو حذف کنی؟
-          </p>
-          <p className="font-vazir_medium text-sm text-red-500 dark:text-red-400">
-            ⚠️ این عملیات قابل بازگشت نیست.
-          </p>
-        </div>
-
+        <DialogDescription>
+          <div className="flex flex-col justify-center gap-y-4 py-2">
+            <p className="font-vazir_bold text-zinc-700 dark:text-zinc-200">
+              میخوای محصول «{productName}» رو حذف کنی؟
+            </p>
+            <p className="font-vazir_medium text-sm text-red-500 dark:text-red-400">
+              ⚠️ این عملیات قابل بازگشت نیست.
+            </p>
+          </div>
+        </DialogDescription>
         <DialogFooter>
           <Button onClick={onClose} size={"md"} variant={"ghost"}>
             لغو
