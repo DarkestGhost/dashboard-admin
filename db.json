@@ -36,6 +36,51 @@
       "status": "unavailable",
       "createdAt": "2026-06-06T10:13:13.420Z",
       "id": "Jz9HVW0h6gk"
+    },
+    {
+      "name": "کابل HDMI",
+      "price": 245244,
+      "stock": 2,
+      "category": "جانبی",
+      "status": "available",
+      "createdAt": "2026-06-06T17:19:33.840Z",
+      "id": "bv2z7Wzbvj8"
+    },
+    {
+      "name": "لپتاپ استوک Lenovo",
+      "price": 24255343,
+      "stock": 2,
+      "category": "جانبی",
+      "status": "available",
+      "createdAt": "2026-06-06T17:52:03.413Z",
+      "id": "Qkfm67VpfE4"
+    },
+    {
+      "name": "دوربین عکاسی",
+      "price": 86000000,
+      "stock": 12,
+      "category": "عکاسی",
+      "status": "available",
+      "createdAt": "2026-06-06T18:49:07.839Z",
+      "id": "kvs0o6uLy-M"
+    },
+    {
+      "name": "کابل LAN",
+      "price": 475000,
+      "stock": 23,
+      "category": "شبکه",
+      "status": "available",
+      "createdAt": "2026-06-06T18:49:38.016Z",
+      "id": "sxwINqEstvQ"
+    },
+    {
+      "name": "موس گیمینگ LOQ",
+      "price": 2300000,
+      "stock": 14,
+      "category": "گیمینگ",
+      "status": "available",
+      "createdAt": "2026-06-06T18:58:47.315Z",
+      "id": "5YBkJhjow4M"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -9,6 +9,9 @@ import { productSchema } from "../validations/productSchema";
 const categoryOptions = [
   { value: "digital", label: "دیجیتال" },
   { value: "accessories", label: "جانبی" },
+  { value: "gaming", label: "گیمینگ" },
+  { value: "networking", label: "شبکه" },
+  { value: "photography", label: "عکاسی" },
 ];
 
 const ProductForm = ({ formSubmit, initialValue, title, isMutating }) => {
