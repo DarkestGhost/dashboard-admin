@@ -12,29 +12,30 @@
   "products": [
     {
       "name": "لپتاپ استوک HP",
-      "price": "242542454",
-      "stock": "4",
+      "price": 12345667,
+      "stock": 0,
       "category": "دیجیتال",
       "status": "available",
-      "id": "PYv5TeGbQDM",
-      "client": {}
+      "createdAt": "2026-06-06T10:11:13.983Z",
+      "id": "WJkAHkUfTW4"
     },
     {
       "name": "گوشی سامسونگ A56",
-      "price": "74000000",
-      "stock": "0",
+      "price": 25252352,
+      "stock": 1,
       "category": "دیجیتال",
       "status": "available",
-      "id": "RYGHTeMbAmA",
-      "client": {}
+      "createdAt": "2026-06-06T10:11:25.644Z",
+      "id": "RJzChP3fuiw"
     },
     {
-      "name": "لپتاپ استوک Lenovo",
-      "price": "2452498",
-      "stock": "2",
-      "category": "دیجیتال",
-      "status": "available",
-      "id": "26kP9lOmTaE"
+      "name": "موس TSCO",
+      "price": 1234132,
+      "stock": 2,
+      "category": "جانبی",
+      "status": "unavailable",
+      "createdAt": "2026-06-06T10:13:13.420Z",
+      "id": "Jz9HVW0h6gk"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

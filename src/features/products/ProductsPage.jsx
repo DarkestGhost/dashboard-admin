@@ -8,6 +8,7 @@ import Loading from "@/components/ui/Loading";
 import ErrorMessage from "@/components/ui/ErrorMessage";
 import { toast } from "sonner";
 import { HiPencil, HiPlus, HiTrash } from "react-icons/hi2";
+import { formatNumber, formatPrice } from "@/utils/formatNumber";
 
 const ProductsPage = () => {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -81,13 +82,13 @@ const ProductsPage = () => {
                   <td className="p-4">{product.name}</td>
                   <td className="p-4">{product.category}</td>
                   <td className="p-4">
-                    {Number(product.price).toLocaleString("fa-IR")} تومان
+                    {formatPrice(product.price)}
                   </td>
                   <td className={"p-4"}>
                     <span
                       className={`px-2 py-1 rounded-full text-xs transition-colors duration-300 ease-linear ${product.stock > 0 ? "text-green-600 bg-green-100" : "text-red-600 bg-red-100"}`}
                     >
-                      {product.stock > 0 ? `${product.stock} عدد` : "ناموجود"}
+                      {product.stock > 0 ? `${formatNumber(product.stock)} عدد` : "ناموجود"}
                     </span>
                   </td>
                   <td className="p-4 flex items-center gap-x-2">
