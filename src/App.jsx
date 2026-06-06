@@ -12,6 +12,7 @@ import SignupPage from "./features/auth/pages/SignupPage";
 import ProtectedRoute from "./components/routes/ProtectedRoute";
 import RootRedirect from "./components/routes/RootRedirect";
 import { Toaster } from "sonner";
+import NotFound from "./pages/NotFound";
 
 const router = createBrowserRouter([
   { path: "/", element: <RootRedirect /> },
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-  { path: "*", element: <p className="text-center">Not Found Page</p> },
+  { path: "*", element: <NotFound /> },
 ]);
 
 const queryClient = new QueryClient();

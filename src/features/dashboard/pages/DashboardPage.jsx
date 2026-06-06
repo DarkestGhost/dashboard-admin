@@ -25,7 +25,7 @@ const DashboardPage = () => {
 
     const recentProducts = [...products].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5);
 
-    const lowStockProducts = products.filter(product => product.stock <= 5).slice(0, 5);
+    const lowStockProducts = products.filter(product => product.stock <= 5).sort((a, b) => a.stock - b.stock).slice(0, 5);
 
     const lowStockChartProducts = products.filter(product => product.stock > 0 && product.stock <= 5).length;
 
@@ -51,7 +51,7 @@ const DashboardPage = () => {
             value: availableProducts,
             formatter: formatNumber,
             description: "محصولاتی که در انبار موجود هستند.",
-            icon: <HiOutlineExclamationTriangle />,
+            icon: <HiOutlineArchiveBox />,
             iconColorClasses: "text-green-600 dark:text-green-400",
         },
         {
@@ -60,7 +60,7 @@ const DashboardPage = () => {
             value: unavailableProducts,
             formatter: formatNumber,
             description: "محصولاتی که موجودی آن‌ها صفر شده است.",
-            icon: <HiOutlineArchiveBox />,
+            icon: <HiOutlineExclamationTriangle />,
             iconColorClasses: "text-red-600 dark:text-red-400",
         },
         {
