@@ -2,16 +2,17 @@ import { useContext, useState } from "react";
 import { AuthContext } from "@/features/auth/context/AuthProvider";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import Button from "@/components/ui/Button";
-import { HiBars3, HiArrowRightOnRectangle } from "react-icons/hi2";
+import { HiBars3, HiArrowRightOnRectangle, HiOutlineShoppingBag, HiOutlineListBullet, HiOutlinePlus, HiOutlineSquares2X2, HiOutlineRectangleGroup } from "react-icons/hi2";
 import { ThemeContext } from "@/context/theme/ThemeProvider";
-import LogoutDialog from "./components/LogoutDialog";
+import SidebarGroup from "./SidebarGroup";
+import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
 const DashboardLayout = () => {
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { user, logout } = useContext(AuthContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const navigate = useNavigate();
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleLogout = () => {
     setIsLogoutOpen(true);
@@ -29,28 +30,27 @@ const DashboardLayout = () => {
         <div className="fixed inset-0 bg-black/50 z-20 md:hidden" onClick={() => setIsSidebarOpen(false)}
         />
       )}
-      <aside className={`fixed top-0 right-0 h-full w-64 bg-zinc-800 dark:bg-zinc-900 text-zinc-100 border-l border-zinc-700 p-4 z-30 transform transition-all duration-300 ease-linear not-last-of-type: ${isSidebarOpen ? "translate-x-0" : "translate-x-full"} md:static md:translate-x-0`}>
+      <aside className={`fixed top-0 right-0 h-full w-68 bg-zinc-800 dark:bg-zinc-900 text-zinc-100 border-l border-zinc-700 p-4 z-30 transform transition-all duration-300 ease-linear not-last-of-type: ${isSidebarOpen ? "translate-x-0" : "translate-x-full"} md:static md:translate-x-0`}>
         <h2 className="text-3xl font-vazir_bold mb-10">پنل ادمین</h2>
         <nav className="flex flex-col justify-center gap-y-2">
+          <span className="text-sm font-vazir_regular text-zinc-500 mb-2">اصلی</span>
           <NavLink
             to={"/dashboard"}
             end
             className={({ isActive }) =>
-              `${isActive ? "bg-zinc-700 dark:bg-zinc-600" : "hover:bg-zinc-700 dark:hover:bg-zinc-600"} block font-vazir_regular text-lg px-4 py-2 rounded-md transition-all duration-300 ease-linear`
+              `${isActive ? "bg-zinc-700 dark:bg-zinc-600" : "hover:bg-zinc-700 dark:hover:bg-zinc-600"} flex items-center gap-x-2 font-vazir_regular text-lg px-4 py-2 rounded-md transition-all duration-300 ease-linear`
             }
             onClick={() => setIsSidebarOpen(false)}
           >
+            <HiOutlineSquares2X2 size={18} />
             داشبورد
           </NavLink>
-          <NavLink
-            to={"/dashboard/products"}
-            className={({ isActive }) =>
-              `${isActive ? "bg-zinc-700 dark:bg-zinc-600" : "hover:bg-zinc-700 dark:hover:bg-zinc-600"} block font-vazir_regular text-lg px-4 py-2 rounded-md transition-all duration-300 ease-linear`
-            }
-            onClick={() => setIsSidebarOpen(false)}
-          >
-            محصولات
-          </NavLink>
+          <SidebarGroup label={"محصولات"} icon={<HiOutlineShoppingBag size={18} />} items={[
+            { label: "همه محصولات", to: "/dashboard/products", icon: <HiOutlineListBullet size={14} /> },
+            { label: "افزودن محصولات", to: "/dashboard/products/addNewProduct", icon: <HiOutlinePlus size={14} /> },
+            { label: "دسته بندی ها", to: "/dashboard/categories", icon: <HiOutlineRectangleGroup size={14} /> },
+          ]} />
+          <span className="text-sm font-vazir_regular text-zinc-500 mb-2">مدیریت</span>
         </nav>
       </aside>
       <main className="flex-1 overflow-y-auto transition-colors duration-300 ease-linear">
@@ -76,11 +76,22 @@ const DashboardLayout = () => {
           <Outlet />
         </div>
       </main>
-      <LogoutDialog
+      <ConfirmDialog
         isOpen={isLogoutOpen}
         onClose={() => setIsLogoutOpen(false)}
         onConfirm={handleConfirmLogout}
-      />
+        title={<><HiArrowRightOnRectangle className="w-5 h-5 text-red-500" />خروج از داشبورد</>}
+        confirmText="خروج"
+      >
+        <div className="flex flex-col justify-center gap-y-4 py-2">
+          <p className="font-vazir_bold text-zinc-700 dark:text-zinc-200">
+            آیا میخوای خارج بشی؟
+          </p>
+          <p className="font-vazir_medium text-sm text-red-500 dark:text-red-400">
+            ⚠️ این عملیات قابل بازگشت نیست.
+          </p>
+        </div>
+      </ConfirmDialog>
     </div>
   );
 };

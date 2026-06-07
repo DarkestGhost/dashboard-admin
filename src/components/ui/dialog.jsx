@@ -1,8 +1,6 @@
-import * as React from "react";
 import { Dialog as DialogPrimitive } from "radix-ui";
 
 import { cn } from "@/lib/utils";
-import { XIcon } from "lucide-react";
 
 function Dialog({ ...props }) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />;
@@ -36,7 +34,6 @@ function DialogOverlay({ className, ...props }) {
 function DialogContent({
   className,
   children,
-  showCloseButton = true,
   ...props
 }) {
   return (
@@ -68,7 +65,6 @@ function DialogHeader({ className, ...props }) {
 
 function DialogFooter({
   className,
-  showCloseButton = false,
   children,
   ...props
 }) {

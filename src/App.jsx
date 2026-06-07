@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import DashboardLayout from "./layout/DashboardLayout";
+import DashboardLayout from "./layout/components/DashboardLayout";
 import DashboardPage from "./features/dashboard/pages/DashboardPage";
 import ProductsPage from "./features/products/ProductsPage";
 import AddProductPage from "./features/products/AddProductPage";
@@ -13,6 +13,7 @@ import ProtectedRoute from "./components/routes/ProtectedRoute";
 import RootRedirect from "./components/routes/RootRedirect";
 import { Toaster } from "sonner";
 import NotFound from "./pages/NotFound";
+import CategoriesPage from "./features/categories/CategoriesPage";
 
 const router = createBrowserRouter([
   { path: "/", element: <RootRedirect /> },
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "products/editProduct/:productId",
         element: <EditProductPage />,
+      },
+      {
+        path: "categories",
+        element: <CategoriesPage />,
       },
     ],
   },

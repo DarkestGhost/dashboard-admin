@@ -2,16 +2,16 @@ import { Link } from "react-router-dom";
 import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Button from "../../components/ui/Button";
-import DeleteProductDialog from "./components/DeleteProductDialog";
 import { fetchProducts, removeProduct } from "@/services/productsApi";
 import Loading from "@/components/ui/Loading";
 import ErrorMessage from "@/components/ui/ErrorMessage";
 import { toast } from "sonner";
-import { HiPencil, HiPlus, HiTrash } from "react-icons/hi2";
+import { HiPencil, HiTrash } from "react-icons/hi2";
 import { formatNumber, formatPrice } from "@/utils/formatNumber";
 import Input from "@/components/ui/Input";
 import Select from "@/components/ui/Select";
 import Pagination from "@/components/ui/Pagination";
+import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
 const categorySearchOptions = [
   { value: "digital", label: "دیجیتال" },
@@ -116,18 +116,9 @@ const ProductsPage = () => {
   const paginated = paginatedProducts();
   return (
     <div className="p-4 sm:p-6">
-      <div className="flex flex-col gap-4 md:flex-row items-center md:justify-between mb-8">
-        <h2 className="text-xl font-vazir_bold text-zinc-800 dark:text-zinc-100 transition-all duration-300 ease-linear">
-          مدیریت محصولات
-        </h2>
-        <Link to={"/dashboard/products/addNewProduct"}>
-          <Button size={"md"} variant={"outline"} className="w-full sm:w-auto flex items-center gap-1 group">
-            <HiPlus className="w-4 h-4 text-blue-700 group-hover:text-white transition-colors" />
-            <span>افزودن محصول جدید</span>
-          </Button>
-        </Link>
-      </div>
-
+      <h2 className="text-xl font-vazir_bold text-zinc-800 dark:text-zinc-100 transition-all duration-300 ease-linear">
+        مدیریت محصولات
+      </h2>
       <div className="w-full my-6 flex flex-col xl:flex-row items-cente justify-center gap-3">
         <Input id={"search"} type="text" placeholder="جستجوی محصولات..." className="flex-1" value={search} onChange={(e) => {
           setSearch(e.target.value),
@@ -215,12 +206,22 @@ const ProductsPage = () => {
           </p>
         </div>
       )}
-      <DeleteProductDialog
+      <ConfirmDialog
         isOpen={isDeleteOpen}
-        productName={selectedProduct?.name}
         onClose={() => setIsDeleteOpen(false)}
         onConfirm={handleConfirmDelete}
-      />
+        title={<><HiTrash className="w-5 h-5 text-red-500" />حذف محصول</>}
+        confirmText="حذف"
+      >
+        <div className="flex flex-col justify-center gap-y-4 py-2">
+          <p className="font-vazir_bold text-zinc-700 dark:text-zinc-200">
+            میخوای محصول «{selectedProduct?.name}» رو حذف کنی؟
+          </p>
+          <p className="font-vazir_medium text-sm text-red-500 dark:text-red-400">
+            ⚠️ این عملیات قابل بازگشت نیست.
+          </p>
+        </div>
+      </ConfirmDialog>
     </div>
   );
 };

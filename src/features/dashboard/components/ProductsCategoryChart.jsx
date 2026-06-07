@@ -21,10 +21,7 @@ const ProductsCategoryChart = ({ products }) => {
                 label: "تعداد محصولات",
                 data: Object.values(categoryCounts),
                 backgroundColor: [
-                    "#3B82F6",
-                    "#10B981",
-                    "#F59E0B",
-                    "#EF4444",
+                    "#3B82F6", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6", "#EC4899", "#14B8A6", "#F97316", "#6366F1", "#84CC16",
                 ],
                 borderWidth: 0,
             },

@@ -9,6 +9,7 @@
       "id": "cF_V7AICJPo"
     }
   ],
+  "categories": [],
   "products": [
     {
       "name": "لپتاپ استوک HP",
@@ -72,16 +73,6 @@
       "status": "available",
       "createdAt": "2026-06-06T18:49:38.016Z",
       "id": "sxwINqEstvQ"
-    },
-    {
-      "name": "موس گیمینگ LOQ",
-      "price": 2300000,
-      "stock": 14,
-      "category": "گیمینگ",
-      "status": "available",
-      "createdAt": "2026-06-06T18:58:47.315Z",
-      "id": "5YBkJhjow4M"
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }
