@@ -14,6 +14,8 @@ import RootRedirect from "./components/routes/RootRedirect";
 import { Toaster } from "sonner";
 import NotFound from "./pages/NotFound";
 import CategoriesPage from "./features/categories/CategoriesPage";
+import AddCategoryPage from "./features/categories/AddCategoryPage";
+import EditCategoryPage from "./features/categories/EditCategoryPage";
 
 const router = createBrowserRouter([
   { path: "/", element: <RootRedirect /> },
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
       {
         path: "categories",
         element: <CategoriesPage />,
+      },
+      {
+        path: "categories/addNewCategory",
+        element: <AddCategoryPage />,
+      },
+      {
+        path: "categories/editCategory/:categoryId",
+        element: <EditCategoryPage />,
       },
     ],
   },

@@ -9,7 +9,38 @@
       "id": "cF_V7AICJPo"
     }
   ],
-  "categories": [],
+  "categories": [
+    {
+      "name": "دیجیتال",
+      "slug": "digital",
+      "createdAt": "2026-06-07T16:48:19.121Z",
+      "id": "Azt13icE88c"
+    },
+    {
+      "name": "جانبی",
+      "slug": "accessories",
+      "createdAt": "2026-06-07T16:50:56.726Z",
+      "id": "LppB9jNzlOM"
+    },
+    {
+      "name": "گیمینگ",
+      "slug": "gaming",
+      "createdAt": "2026-06-07T16:51:16.739Z",
+      "id": "nk4rBd_J5ak"
+    },
+    {
+      "name": "شبکه",
+      "slug": "networking",
+      "createdAt": "2026-06-07T16:51:24.432Z",
+      "id": "voIDNVnmOEw"
+    },
+    {
+      "name": "عکاسی",
+      "slug": "photography",
+      "createdAt": "2026-06-07T16:51:38.161Z",
+      "id": "_3WYen5S5X8"
+    }
+  ],
   "products": [
     {
       "name": "لپتاپ استوک HP",

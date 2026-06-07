@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -5,16 +6,17 @@ import Input from "@/components/ui/Input";
 import Select from "@/components/ui/Select";
 import Button from "@/components/ui/Button";
 import { productSchema } from "../validations/productSchema";
-
-const categoryOptions = [
-  { value: "digital", label: "دیجیتال" },
-  { value: "accessories", label: "جانبی" },
-  { value: "gaming", label: "گیمینگ" },
-  { value: "networking", label: "شبکه" },
-  { value: "photography", label: "عکاسی" },
-];
+import { fetchCategories } from "@/services/categoriesApi";
+import Loading from "@/components/ui/Loading";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 
 const ProductForm = ({ formSubmit, initialValue, title, isMutating }) => {
+
+  const { data: categoryOptions, error, isError, isLoading, refetch } = useQuery({
+    queryKey: ["categories"],
+    queryFn: fetchCategories,
+  })
+
   const {
     register,
     handleSubmit,
@@ -25,6 +27,10 @@ const ProductForm = ({ formSubmit, initialValue, title, isMutating }) => {
   const onSubmit = async (data) => {
     await formSubmit(data);
   };
+
+  if (isLoading) return <Loading message="در حال دریافت دسته بندی ها..." />;
+
+  if (isError) return <ErrorMessage message={error.message} onRetry={refetch} />;
 
   return (
     <div className="p-4 sm:p-6">

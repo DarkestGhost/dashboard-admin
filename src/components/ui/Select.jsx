@@ -22,8 +22,8 @@ const Select = ({
           {placeholder}
         </option>
         {options.map((option) => (
-          <option key={option.value} value={option.label} className="dark:bg-zinc-700 dark:text-zinc-100">
-            {option.label}
+          <option key={option.slug} value={option.slug} className="dark:bg-zinc-700 dark:text-zinc-100">
+            {option.name}
           </option>
         ))}
       </select>
