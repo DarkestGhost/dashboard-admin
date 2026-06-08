@@ -41,6 +41,54 @@
       "id": "_3WYen5S5X8"
     }
   ],
+  "orders": [
+    {
+      "orderId": "#1001",
+      "name": "محمد محمدی",
+      "totalPrice": 24000000,
+      "status": "pending",
+      "createdAt": "2026-04-23T09:36:56.241Z",
+      "items": [
+        {
+          "id": "i-1",
+          "name": "لپتاپ استوک HP",
+          "price": 12345667,
+          "quantity": 1
+        },
+        {
+          "id": "i-2",
+          "name": "دوربین عکاسی",
+          "price": 64000000,
+          "quantity": 1
+        }
+      ],
+      "id": "x4-W9Pa2pAk",
+      "newStatus": "completed"
+    },
+    {
+      "orderId": "#1002",
+      "name": "علی نصیری",
+      "totalPrice": 53000000,
+      "status": "processing",
+      "createdAt": "2026-06-08T09:36:56.241Z",
+      "items": [
+        {
+          "id": "i-1",
+          "name": "موس TSCO",
+          "price": 12345667,
+          "quantity": 2
+        },
+        {
+          "id": "i-2",
+          "name": "دوربین عکاسی",
+          "price": 64000000,
+          "quantity": 1
+        }
+      ],
+      "id": "TedS0x6O0xc",
+      "newStatus": "cancelled"
+    }
+  ],
   "products": [
     {
       "name": "لپتاپ استوک HP",
@@ -104,6 +152,16 @@
       "status": "available",
       "createdAt": "2026-06-06T18:49:38.016Z",
       "id": "sxwINqEstvQ"
+    },
+    {
+      "name": "موس گیمینگ LOQ",
+      "price": 2300000,
+      "stock": 23,
+      "category": "gaming",
+      "status": "available",
+      "createdAt": "2026-06-07T17:38:58.659Z",
+      "id": "25Lzg-JdoAg"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

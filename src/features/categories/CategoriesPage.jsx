@@ -16,13 +16,7 @@ import { sortByDate, sortByName } from "@/utils/sortItems";
 import Button from "@/components/ui/Button";
 import { NavLink } from "react-router-dom";
 import { HiPlus } from "react-icons/hi2";
-
-const sortOptions = [
-  { slug: "newest", name: "جدیدترین" },
-  { slug: "oldest", name: "قدیمی‌ترین" },
-  { slug: "nameAsc", name: "نام (الف تا ی)" },
-  { slug: "nameDesc", name: "نام (ی تا الف)" },
-];
+import { sortCategoriesOptions } from "@/constants/options";
 
 const columns = [
   { key: "name", header: "نام دسته‌بندی" },
@@ -92,7 +86,7 @@ const CategoriesPage = () => {
 
   return (
     <div className="p-4 sm:p-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 md:flex-row items-center md:justify-between mb-8">
         <h2 className="text-xl font-vazir_bold text-zinc-800 dark:text-zinc-100 transition-all duration-300 ease-linear">
           مدیریت دسته‌بندی‌ها
         </h2>
@@ -108,7 +102,7 @@ const CategoriesPage = () => {
         <Input
           id="search"
           type="text"
-          placeholder="جستجوی دسته‌بندی‌ها..."
+          placeholder="جستجوی دسته بندی..."
           className="flex-1"
           value={search}
           onChange={(e) => {
@@ -119,7 +113,7 @@ const CategoriesPage = () => {
 
         <Select
           id="sort"
-          options={sortOptions}
+          options={sortCategoriesOptions}
           placeholder="مرتب‌سازی..."
           className="sm:w-50"
           value={sortBy}

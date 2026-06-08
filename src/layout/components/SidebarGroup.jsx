@@ -9,7 +9,7 @@ const SidebarGroup = ({ label, icon, items }) => {
 
     return (
         <Collapsible open={open} onOpenChange={setOpen}>
-            <CollapsibleTrigger className="flex items-center gap-x-2 w-full px-4 py-2 mb-2 cursor-pointer font-vazir_regular text-lg">
+            <CollapsibleTrigger className="flex items-center gap-x-2 w-full px-4 py-2 cursor-pointer font-vazir_regular text-lg">
                 {icon}
                 {label}
                 <HiChevronLeft

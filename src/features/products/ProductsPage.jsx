@@ -15,14 +15,28 @@ import { useClientPagination } from "@/hooks/useClientPagination";
 import { useDeleteItem } from "@/hooks/useDeleteItem";
 import { sortByDate } from "@/utils/sortItems";
 import { fetchCategories } from "@/services/categoriesApi";
+import { sortProductsOptions } from "@/constants/options";
 
-const sortSearchOptions = [
-  { slug: "newest", name: "جدیدترین" },
-  { slug: "oldest", name: "قدیمی‌ترین" },
-  { slug: "mostExpensive", name: "گران‌ترین" },
-  { slug: "cheapest", name: "ارزان‌ترین" },
-  { slug: "maxInventory", name: "بیشترین موجودی" },
-  { slug: "minInventory", name: "کمترین موجودی" },
+const columns = [
+  { key: "name", header: "نام محصول" },
+  { key: "category", header: "دسته‌بندی" },
+  {
+    key: "price",
+    header: "قیمت",
+    render: (row) => formatPrice(row.price),
+  },
+  {
+    key: "stock",
+    header: "موجودی",
+    render: (row) => (
+      <span
+        className={`px-2 py-1 rounded-full text-xs transition-colors duration-300 ease-linear ${row.stock > 0 ? "text-green-600 bg-green-100" : "text-red-600 bg-red-100"
+          }`}
+      >
+        {row.stock > 0 ? `${formatNumber(row.stock)} عدد` : "ناموجود"}
+      </span>
+    ),
+  },
 ];
 
 const ProductsPage = () => {
@@ -106,28 +120,6 @@ const ProductsPage = () => {
 
   if (categoryIsError) return <ErrorMessage message={categoryError.message} onRetry={categoryRefetch} />;
 
-  const columns = [
-    { key: "name", header: "نام محصول" },
-    { key: "category", header: "دسته‌بندی" },
-    {
-      key: "price",
-      header: "قیمت",
-      render: (row) => formatPrice(row.price),
-    },
-    {
-      key: "stock",
-      header: "موجودی",
-      render: (row) => (
-        <span
-          className={`px-2 py-1 rounded-full text-xs transition-colors duration-300 ease-linear ${row.stock > 0 ? "text-green-600 bg-green-100" : "text-red-600 bg-red-100"
-            }`}
-        >
-          {row.stock > 0 ? `${formatNumber(row.stock)} عدد` : "ناموجود"}
-        </span>
-      ),
-    },
-  ];
-
   return (
     <div className="p-4 sm:p-6">
       <h2 className="text-xl font-vazir_bold text-zinc-800 dark:text-zinc-100 transition-all duration-300 ease-linear">
@@ -162,7 +154,7 @@ const ProductsPage = () => {
 
           <Select
             id="sort"
-            options={sortSearchOptions}
+            options={sortProductsOptions}
             placeholder="مرتب‌سازی..."
             className="sm:w-50"
             value={sortBy}

@@ -16,6 +16,7 @@ import NotFound from "./pages/NotFound";
 import CategoriesPage from "./features/categories/CategoriesPage";
 import AddCategoryPage from "./features/categories/AddCategoryPage";
 import EditCategoryPage from "./features/categories/EditCategoryPage";
+import OrdersPage from "./features/orders/OrdersPage";
 
 const router = createBrowserRouter([
   { path: "/", element: <RootRedirect /> },
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "categories/editCategory/:categoryId",
         element: <EditCategoryPage />,
+      },
+      {
+        path: "orders",
+        element: <OrdersPage />,
       },
     ],
   },
