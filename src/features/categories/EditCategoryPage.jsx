@@ -13,13 +13,23 @@ const EditCategoryPage = () => {
 
   const { mutate, isPending: isMutating } = useMutation({
     mutationFn: editCategory,
+    onMutate: async (data) => {
+      await queryClient.cancelQueries({ queryKey: ["categories", categoryId] });
+      const previousData = queryClient.getQueryData(["categories", categoryId]);
+      queryClient.setQueryData(["categories", categoryId], (oldData) => ({ ...oldData, ...data }));
+      return { previousData }
+    },
+    onError: (error, data, context) => {
+      toast.error(error.message);
+      queryClient.setQueryData(["categories", categoryId], context.previousData);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["categories", categoryId] });
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["categories"] });
+      queryClient.invalidateQueries({ queryKey: ["categories", categoryId] });
       toast.success("دسته‌بندی با موفقیت ویرایش شد.");
       navigate("/dashboard/categories");
-    },
-    onError: (error) => {
-      toast.error(error.message);
     },
   });
 

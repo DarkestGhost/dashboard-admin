@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import ErrorMessage from "@/components/ui/ErrorMessage";
 
 export const useDeleteItem = ({ queryKey, deleteFn, successMessage }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,12 +10,27 @@ export const useDeleteItem = ({ queryKey, deleteFn, successMessage }) => {
 
   const { mutate } = useMutation({
     mutationFn: deleteFn,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey });
-      toast.success(successMessage);
+    onMutate: async (itemId) => {
+      await queryClient.cancelQueries({
+        queryKey: queryKey,
+      });
+      const previousProducts = queryClient.getQueryData(queryKey);
+      queryClient.setQueryData(queryKey, (old) =>
+        old?.filter((oldItem) => oldItem.id !== itemId),
+      );
+      return { previousProducts };
     },
-    onError: (error) => {
-      toast.error(error.message);
+    onError: (error, itemId, context) => {
+      toast.error(ErrorMessage);
+      queryClient.setQueryData(queryKey, context.previousProducts);
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: queryKey });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKey });
+      toast.success(successMessage);
     },
   });
 

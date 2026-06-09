@@ -15,13 +15,23 @@ const AddCategoryPage = () => {
 
   const { mutate, isPending: isMutating } = useMutation({
     mutationFn: addNewCategoriy,
+    onMutate: async (data) => {
+      await queryClient.cancelQueries({ queryKey: ["categories"], });
+      const previousProducts = queryClient.getQueryData(["categories"]);
+      queryClient.setQueryData(["categories"], (old) => [...old, { ...data, }]);
+      return { previousProducts };
+    },
+    onError: (error, data, context) => {
+      toast.error(error.message);
+      queryClient.setQueryData(["categories"], context.previousProducts);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["categories"], });
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["categories"] });
       toast.success("دسته‌بندی با موفقیت اضافه شد.");
       navigate("/dashboard/categories");
-    },
-    onError: (error) => {
-      toast.error(error.message);
     },
   });
 

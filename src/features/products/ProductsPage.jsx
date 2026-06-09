@@ -17,28 +17,6 @@ import { sortByDate } from "@/utils/sortItems";
 import { fetchCategories } from "@/services/categoriesApi";
 import { sortProductsOptions } from "@/constants/options";
 
-const columns = [
-  { key: "name", header: "نام محصول" },
-  { key: "category", header: "دسته‌بندی" },
-  {
-    key: "price",
-    header: "قیمت",
-    render: (row) => formatPrice(row.price),
-  },
-  {
-    key: "stock",
-    header: "موجودی",
-    render: (row) => (
-      <span
-        className={`px-2 py-1 rounded-full text-xs transition-colors duration-300 ease-linear ${row.stock > 0 ? "text-green-600 bg-green-100" : "text-red-600 bg-red-100"
-          }`}
-      >
-        {row.stock > 0 ? `${formatNumber(row.stock)} عدد` : "ناموجود"}
-      </span>
-    ),
-  },
-];
-
 const ProductsPage = () => {
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
@@ -65,6 +43,40 @@ const ProductsPage = () => {
     deleteFn: removeProduct,
     successMessage: "محصول با موفقیت حذف شد.",
   });
+
+  const categoryMap = useMemo(() => {
+    if (!categorySearchOptions) return {};
+
+    return categorySearchOptions.reduce((acc, item) => {
+      acc[item.slug] = item.name;
+      return acc;
+    }, {});
+  }, [categorySearchOptions]);
+
+  const columns = useMemo(() => [
+    { key: "name", header: "نام محصول" },
+    {
+      key: "category", header: "دسته‌بندی", render: (row) =>
+        categoryMap[row.category] || row.category,
+    },
+    {
+      key: "price",
+      header: "قیمت",
+      render: (row) => formatPrice(row.price),
+    },
+    {
+      key: "stock",
+      header: "موجودی",
+      render: (row) => (
+        <span
+          className={`px-2 py-1 rounded-full text-xs transition-colors duration-300 ease-linear ${row.stock > 0 ? "text-green-600 bg-green-100" : "text-red-600 bg-red-100"
+            }`}
+        >
+          {row.stock > 0 ? `${formatNumber(row.stock)} عدد` : "ناموجود"}
+        </span>
+      ),
+    },
+  ], [categoryMap]);
 
   const filteredProducts = useMemo(() => {
     let results = [...products];

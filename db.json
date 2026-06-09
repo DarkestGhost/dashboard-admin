@@ -69,7 +69,7 @@
       "orderId": "#1002",
       "name": "علی نصیری",
       "totalPrice": 53000000,
-      "status": "processing",
+      "status": "cancelled",
       "createdAt": "2026-06-08T09:36:56.241Z",
       "items": [
         {
@@ -94,7 +94,7 @@
       "name": "لپتاپ استوک HP",
       "price": 12345667,
       "stock": 3,
-      "category": "دیجیتال",
+      "category": "digital",
       "status": "available",
       "createdAt": "2026-06-06T10:11:13.983Z",
       "id": "WJkAHkUfTW4"
@@ -102,8 +102,8 @@
     {
       "name": "گوشی سامسونگ A56",
       "price": 25252352,
-      "stock": 4,
-      "category": "دیجیتال",
+      "stock": 6,
+      "category": "photography",
       "status": "available",
       "createdAt": "2026-06-06T10:11:25.644Z",
       "id": "RJzChP3fuiw"
@@ -112,7 +112,7 @@
       "name": "موس TSCO",
       "price": 1234132,
       "stock": 0,
-      "category": "جانبی",
+      "category": "accessories",
       "status": "unavailable",
       "createdAt": "2026-06-06T10:13:13.420Z",
       "id": "Jz9HVW0h6gk"
@@ -121,7 +121,7 @@
       "name": "کابل HDMI",
       "price": 245244,
       "stock": 2,
-      "category": "جانبی",
+      "category": "accessories",
       "status": "available",
       "createdAt": "2026-06-06T17:19:33.840Z",
       "id": "bv2z7Wzbvj8"
@@ -130,7 +130,7 @@
       "name": "لپتاپ استوک Lenovo",
       "price": 24255343,
       "stock": 2,
-      "category": "جانبی",
+      "category": "accessories",
       "status": "available",
       "createdAt": "2026-06-06T17:52:03.413Z",
       "id": "Qkfm67VpfE4"
@@ -139,7 +139,7 @@
       "name": "دوربین عکاسی",
       "price": 86000000,
       "stock": 12,
-      "category": "عکاسی",
+      "category": "photography",
       "status": "available",
       "createdAt": "2026-06-06T18:49:07.839Z",
       "id": "kvs0o6uLy-M"
@@ -148,19 +148,19 @@
       "name": "کابل LAN",
       "price": 475000,
       "stock": 23,
-      "category": "شبکه",
+      "category": "networking",
       "status": "available",
       "createdAt": "2026-06-06T18:49:38.016Z",
       "id": "sxwINqEstvQ"
     },
     {
-      "name": "موس گیمینگ LOQ",
+      "name": "موس TSCO",
       "price": 2300000,
-      "stock": 23,
+      "stock": 0,
       "category": "gaming",
-      "status": "available",
-      "createdAt": "2026-06-07T17:38:58.659Z",
-      "id": "25Lzg-JdoAg"
+      "status": "unavailable",
+      "createdAt": "2026-06-09T17:52:16.455Z",
+      "id": "46Xqi9iQMGo"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

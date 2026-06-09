@@ -18,16 +18,25 @@ const AddProductPage = () => {
 
   const { mutate } = useMutation({
     mutationFn: addNewProduct,
+    onMutate: async (data) => {
+      await queryClient.cancelQueries({ queryKey: ["products"], });
+      const previousProducts = queryClient.getQueryData(["products"]);
+      queryClient.setQueryData(["products"], (old) => [...old, { ...data, },
+      ]);
+      return { previousProducts };
+    },
+    onError: (error, data, context) => {
+      toast.error(error.message);
+      queryClient.setQueryData(["products"], context.previousProducts);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"], });
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
-
       toast.success("محصول با موفقیت اضافه شد.");
-
       navigate("/dashboard/products");
     },
-    onError: (error) => {
-      toast.error(error.message);
-    }
   });
 
   const handleAddProduct = (data) => mutate(data);

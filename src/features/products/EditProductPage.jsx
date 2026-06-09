@@ -8,24 +8,30 @@ import { toast } from "sonner";
 
 const EditProductPage = () => {
   const queryClient = useQueryClient();
-
+  const { productId } = useParams();
   const navigate = useNavigate();
 
   const { mutate, isPending: isMutating } = useMutation({
     mutationFn: editProduct,
+    onMutate: async (data) => {
+      await queryClient.cancelQueries({ queryKey: ["products", productId] });
+      const previousData = queryClient.getQueryData(["products", productId]);
+      queryClient.setQueryData(["products", productId], (oldData) => ({ ...oldData, ...data }));
+      return { previousData }
+    },
+    onError: (error, data, context) => {
+      toast.error(error.message);
+      queryClient.setQueryData(["products", productId], context.previousData);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["products", productId] });
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] });
-
+      queryClient.invalidateQueries({ queryKey: ["products", productId] });
       toast.success("محصول با موفقیت ویرایش شد.");
-
       navigate("/dashboard/products");
     },
-    onError: (error) => {
-      toast.error(error.message);
-    }
   });
-
-  const { productId } = useParams();
 
   const { data: product, isLoading: isProductLoading, isError: isProductError, error: productError, refetch } = useQuery({
     queryKey: ["products", productId],

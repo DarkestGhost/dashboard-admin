@@ -48,12 +48,25 @@ const OrdersPage = () => {
 
     const { mutate } = useMutation({
         mutationFn: editOrder,
+        onMutate: async (data) => {
+            await queryClient.cancelQueries({ queryKey: ["orders"] });
+            const previousData = queryClient.getQueryData(["orders"]);
+            queryClient.setQueryData(["orders"], (old = []) => old.map(order => order.id === data.id ? {
+                ...order,
+                status: data.status,
+            } : order));
+            return { previousData }
+        },
+        onError: (error, data, context) => {
+            toast.error(error.message);
+            queryClient.setQueryData(["orders"], context.previousData);
+        },
+        onSettled: () => {
+            queryClient.invalidateQueries({ queryKey: ["orders"] });
+        },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["orders"] });
             toast.success("وضعیت سفارش با موفقیت بروزرسانی شد.");
-        },
-        onError: (error) => {
-            toast.error(error.message);
         },
     })
 
