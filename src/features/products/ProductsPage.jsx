@@ -29,7 +29,7 @@ const ProductsPage = () => {
     queryFn: fetchProducts,
   });
 
-  const { data: categorySearchOptions, error: categoryError, isError: categoryIsError, isLoading: categoryIsLoading, refetch: categoryRefetch } = useQuery({
+  const { data: categorySearchOptions, error: categoryError, isError: categoryIsError, refetch: categoryRefetch } = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
   })
@@ -129,8 +129,6 @@ const ProductsPage = () => {
   if (isLoading) return <Loading message="در حال دریافت محصولات..." />;
 
   if (isError) return <ErrorMessage message={error.message} onRetry={refetch} />;
-
-  if (categoryIsLoading) return <Loading message="در حال دریافت دسته بندی ها..." />;
 
   if (categoryIsError) return <ErrorMessage message={categoryError.message} onRetry={categoryRefetch} />;
 
