@@ -91,12 +91,7 @@ const ProductsPage = () => {
     }
 
     if (categoryFilter) {
-      const categoryName = categorySearchOptions.find(
-        (category) => category.slug === categoryFilter,
-      ).name;
-      if (categoryName) {
-        results = results.filter((product) => product.category === categoryName);
-      }
+      results = results.filter((product) => product.category === categoryFilter);
     }
 
     switch (sortBy) {

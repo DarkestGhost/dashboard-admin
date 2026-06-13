@@ -196,7 +196,7 @@ const OrdersPage = () => {
                             )}
                         </p>
                         <span>محصولات سفارش: </span>
-                        {selectedOrder.items.map(item => (
+                        {(selectedOrder.items?.items || selectedOrder.items || []).map(item => (
                             <div className="mr-6 flex items-center gap-x-2">
                                 <span>نام محصول : {item.name}</span>
                                 <span>تعداد : {item.quantity}</span>
