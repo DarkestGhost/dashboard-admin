@@ -1,17 +1,18 @@
 import { supabase } from "./supabase";
 
 export const registerUser = async (userData) => {
+  const { confirmPassword, ...dataToSave } = userData;
+
   const { data: users, error: fetchError } = await supabase
     .from("users")
     .select("*")
-    .eq("email", userData.email);
+    .eq("email", dataToSave.email);
 
   if (fetchError) throw new Error("خطایی رخ داد.");
-
   if (users.length > 0) throw new Error("ایمیل قبلا ثبت شده است.");
 
   const newUser = {
-    ...userData,
+    ...dataToSave,
     role: "staff",
     accessToken: crypto.randomUUID(),
   };
@@ -23,7 +24,6 @@ export const registerUser = async (userData) => {
     .single();
 
   if (error) throw new Error(error.message);
-
   return data;
 };
 
