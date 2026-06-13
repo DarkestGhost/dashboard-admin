@@ -1,29 +1,28 @@
-const BASE_URL = "http://localhost:3001";
+import { supabase } from "./supabase";
 
 export const fetchOrders = async () => {
-  const response = await fetch(`${BASE_URL}/orders`);
-
-  if (!response.ok) throw new Error("خطایی در دریافت سفارشات رخ داد.");
-
-  return response.json();
+  const { data, error } = await supabase.from("orders").select("*");
+  if (error) throw new Error("خطایی در دریافت سفارشات رخ داد.");
+  return data;
 };
 
 export const fetchOrder = async (id) => {
-  const response = await fetch(`${BASE_URL}/orders/${id}`);
-
-  if (!response.ok) throw new Error("خطایی در دریافت سفارش رخ داد.");
-
-  return response.json();
+  const { data, error } = await supabase
+    .from("orders")
+    .select("*")
+    .eq("id", id)
+    .single();
+  if (error) throw new Error("خطایی در دریافت سفارش رخ داد.");
+  return data;
 };
 
-export const editOrder = async ({ id, ...productData }) => {  
-  const response = await fetch(`${BASE_URL}/orders/${id}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(productData),
-  });
-
-  if (!response.ok) throw new Error("خطایی در ویرایش سفارش رخ داد.");
-
-  return response.json();
+export const editOrder = async ({ id, ...orderData }) => {
+  const { data, error } = await supabase
+    .from("orders")
+    .update(orderData)
+    .eq("id", id)
+    .select()
+    .single();
+  if (error) throw new Error("خطایی در ویرایش سفارش رخ داد.");
+  return data;
 };

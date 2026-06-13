@@ -1,55 +1,47 @@
-const BASE_URL = "http://localhost:3001";
+import { supabase } from "./supabase";
 
 export const fetchProducts = async () => {
-  const response = await fetch(`${BASE_URL}/products`);
-
-  if (!response.ok) throw new Error("خطایی در دریافت محصولات رخ داد.");
-
-  return response.json();
+  const { data, error } = await supabase.from("products").select("*");
+  if (error) throw new Error("خطایی در دریافت محصولات رخ داد.");
+  return data;
 };
 
 export const fetchProduct = async (id) => {
-  const response = await fetch(`${BASE_URL}/products/${id}`);
-
-  if (!response.ok) throw new Error("خطایی در دریافت محصول رخ داد.");
-
-  return response.json();
+  const { data, error } = await supabase
+    .from("products")
+    .select("*")
+    .eq("id", id)
+    .single();
+  if (error) throw new Error("خطایی در دریافت محصول رخ داد.");
+  return data;
 };
 
 export const addNewProduct = async (productData) => {
-  const response = await fetch(`${BASE_URL}/products`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
+  const { data, error } = await supabase
+    .from("products")
+    .insert({
       ...productData,
       status: productData.stock > 0 ? "available" : "unavailable",
       createdAt: new Date().toISOString(),
-    }),
-  });
-
-  if (!response.ok) throw new Error("خطایی در اضافه کردن محصول جدید رخ داد.");
-
-  return response.json();
+    })
+    .select()
+    .single();
+  if (error) throw new Error("خطایی در اضافه کردن محصول جدید رخ داد.");
+  return data;
 };
 
 export const removeProduct = async (id) => {
-  const response = await fetch(`${BASE_URL}/products/${id}`, {
-    method: "DELETE",
-  });
-
-  if (!response.ok) throw new Error("خطایی در حذف کردن محصول رخ داد.");
-
-  return response.json();
+  const { error } = await supabase.from("products").delete().eq("id", id);
+  if (error) throw new Error("خطایی در حذف کردن محصول رخ داد.");
 };
 
 export const editProduct = async ({ id, ...productData }) => {
-  const response = await fetch(`${BASE_URL}/products/${id}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(productData),
-  });
-
-  if (!response.ok) throw new Error("خطایی در ویرایش محصول رخ داد.");
-
-  return response.json();
+  const { data, error } = await supabase
+    .from("products")
+    .update(productData)
+    .eq("id", id)
+    .select()
+    .single();
+  if (error) throw new Error("خطایی در ویرایش محصول رخ داد.");
+  return data;
 };

@@ -1,6 +1,6 @@
 import { createContext, useCallback, useState } from "react";
 import { setAuthToken, removeAuthtoken, getAuthToken } from "../utils/authStorage";
-import { loginUser, registerUser } from "../services/authService";
+import { loginUser, registerUser } from "../../../services/authService";
 
 const AuthContext = createContext({
     user: null,
