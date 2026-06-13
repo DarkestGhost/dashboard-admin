@@ -6,7 +6,17 @@
       "password": "AliMahdi@8593",
       "confirmPassword": "AliMahdi@8593",
       "accessToken": "23063397-b7a0-4d19-9235-9058b345c471",
+      "role": "admin",
       "id": "cF_V7AICJPo"
+    },
+    {
+      "fullName": "محمد محمدی",
+      "email": "ziarati859399@gmail.com",
+      "password": "MOHAMMADmohammadi1385@",
+      "confirmPassword": "MOHAMMADmohammadi1385@",
+      "role": "staff",
+      "accessToken": "7bf0b108-d7e1-4525-91d4-7ff7b2315199",
+      "id": "_Sn00J-TWb8"
     }
   ],
   "categories": [
@@ -46,7 +56,7 @@
       "orderId": "#1001",
       "name": "محمد محمدی",
       "totalPrice": 24000000,
-      "status": "pending",
+      "status": "processing",
       "createdAt": "2026-04-23T09:36:56.241Z",
       "items": [
         {
@@ -162,6 +172,5 @@
       "createdAt": "2026-06-09T17:52:16.455Z",
       "id": "46Xqi9iQMGo"
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }

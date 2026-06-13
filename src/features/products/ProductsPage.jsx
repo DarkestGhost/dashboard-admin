@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProducts, removeProduct } from "@/services/productsApi";
 import Loading from "@/components/ui/Loading";
@@ -16,11 +16,13 @@ import { useDeleteItem } from "@/hooks/useDeleteItem";
 import { sortByDate } from "@/utils/sortItems";
 import { fetchCategories } from "@/services/categoriesApi";
 import { sortProductsOptions } from "@/constants/options";
+import { AuthContext } from "../auth/context/AuthProvider";
 
 const ProductsPage = () => {
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [sortBy, setSortBy] = useState("");
+  const { user } = useContext(AuthContext);
 
   const { data: products = [], isLoading, isError, error, refetch } = useQuery({
     queryKey: ["products"],
@@ -183,12 +185,12 @@ const ProductsPage = () => {
           <DataTable
             columns={columns}
             data={paginated}
-            renderActions={(product) => (
+            renderActions={user.role === "admin" ? (product) => (
               <RowActions
                 editPath={`/dashboard/products/editProduct/${product.id}`}
                 onDelete={() => openDeleteDialog(product)}
               />
-            )}
+            ) : undefined}
           />
           <Pagination
             currentPage={currentPage}

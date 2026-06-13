@@ -26,7 +26,7 @@ const AuthProvider = ({ children }) => {
         setToken(response.accessToken);
         setAuthToken(response.accessToken);
 
-        const safeUser = { id: response.id, name: response.fullName };
+        const safeUser = { id: response.id, name: response.fullName, role: response.role };
         setUser(safeUser);
         localStorage.setItem("user", JSON.stringify(safeUser));
     }, []);
@@ -36,7 +36,7 @@ const AuthProvider = ({ children }) => {
         setToken(response.accessToken);
         setAuthToken(response.accessToken);
 
-        const safeUser = { id: response.id, name: response.fullName };
+        const safeUser = { id: response.id, name: response.fullName, role: response.role };
         setUser(safeUser);
         localStorage.setItem("user", JSON.stringify(safeUser));
     }, []);
@@ -58,7 +58,7 @@ const AuthProvider = ({ children }) => {
         login,
         register,
         logout,
-    }
+    }    
 
     return (
         <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

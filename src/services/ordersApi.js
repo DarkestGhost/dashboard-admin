@@ -16,9 +16,7 @@ export const fetchOrder = async (id) => {
   return response.json();
 };
 
-export const editOrder = async ({ id, ...productData }) => {
-  console.log(productData);
-  
+export const editOrder = async ({ id, ...productData }) => {  
   const response = await fetch(`${BASE_URL}/orders/${id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },

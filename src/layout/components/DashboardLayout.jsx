@@ -47,7 +47,7 @@ const DashboardLayout = () => {
           </NavLink>
           <SidebarGroup label={"محصولات"} icon={<HiOutlineShoppingBag size={18} />} items={[
             { label: "همه محصولات", to: "/dashboard/products", icon: <HiOutlineListBullet size={14} /> },
-            { label: "افزودن محصول", to: "/dashboard/products/addNewProduct", icon: <HiOutlinePlus size={14} /> },
+            ...(user.role === "admin" ? [{ label: "افزودن محصول", to: "/dashboard/products/addNewProduct", icon: <HiOutlinePlus size={14} /> }] : []),
             { label: "دسته بندی ها", to: "/dashboard/categories", icon: <HiOutlineRectangleGroup size={14} /> },
           ]} />
           <NavLink

@@ -12,6 +12,7 @@ export const registerUser = async (userData) => {
 
   const newUser = {
     ...userData,
+    role: "staff",
     accessToken: crypto.randomUUID(),
   };
 

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchCategories, removeCategory } from "@/services/categoriesApi";
 import Loading from "@/components/ui/Loading";
@@ -14,9 +14,10 @@ import { useClientPagination } from "@/hooks/useClientPagination";
 import { useDeleteItem } from "@/hooks/useDeleteItem";
 import { sortByDate, sortByName } from "@/utils/sortItems";
 import Button from "@/components/ui/Button";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { HiPlus } from "react-icons/hi2";
 import { sortCategoriesOptions } from "@/constants/options";
+import { AuthContext } from "../auth/context/AuthProvider";
 
 const columns = [
   { key: "name", header: "نام دسته‌بندی" },
@@ -30,6 +31,7 @@ const columns = [
 const CategoriesPage = () => {
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState("");
+  const { user } = useContext(AuthContext);
 
   const { data: categories = [], isLoading, isError, error, refetch } = useQuery({
     queryKey: ["categories"],
@@ -90,12 +92,12 @@ const CategoriesPage = () => {
         <h2 className="text-xl font-vazir_bold text-zinc-800 dark:text-zinc-100 transition-all duration-300 ease-linear">
           مدیریت دسته‌بندی‌ها
         </h2>
-        <NavLink to={"/dashboard/categories/addNewCategory"}>
+        {user.role === "admin" && <Link to={"/dashboard/categories/addNewCategory"}>
           <Button size={"md"} variant={"primary"} className="w-full sm:w-auto flex items-center justify-center gap-2">
             <HiPlus size={16} />
             افزودن دسته بندی جدید
           </Button>
-        </NavLink>
+        </Link>}
       </div>
 
       <div className="w-full my-6 flex flex-col xl:flex-row items-center justify-center gap-3">
@@ -129,12 +131,12 @@ const CategoriesPage = () => {
           <DataTable
             columns={columns}
             data={paginated}
-            renderActions={(category) => (
+            renderActions={user.role === "admin" ? (category) => (
               <RowActions
                 editPath={`/dashboard/categories/editCategory/${category.id}`}
                 onDelete={() => openDeleteDialog(category)}
               />
-            )}
+            ) : undefined}
           />
           <Pagination
             currentPage={currentPage}

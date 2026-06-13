@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef } from "react";
+import { useMemo, useState, useRef, useContext } from "react";
 import DataTable from "@/components/list/DataTable";
 import EmptyListState from "@/components/list/EmptyListState";
 import ErrorMessage from "@/components/ui/ErrorMessage";
@@ -15,6 +15,7 @@ import Button from "@/components/ui/Button";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import { toast } from "sonner";
 import { sortOrdersOptions, statusOrderOptions } from "@/constants/options";
+import { AuthContext } from "../auth/context/AuthProvider";
 
 const columns = [
     { key: "orderId", header: "شماره سفارش" },
@@ -34,6 +35,7 @@ const columns = [
 ];
 
 const OrdersPage = () => {
+    const { user } = useContext(AuthContext);
     const [isOpenDialog, setIsOpenDialog] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [search, setSearch] = useState("");
@@ -180,7 +182,8 @@ const OrdersPage = () => {
                     description="می‌توانید با زدن دکمه افزودن دسته‌بندی جدید، دسته‌بندی‌ای به لیستتان اضافه کنید."
                 />
             )}
-            <ConfirmDialog isOpen={isOpenDialog} onClose={handleCloseDialog} onConfirm={handleConfirmDialog} title={"اطلاعات محصولات سفارش"} cancelText="باشه" confirmText={"ذخیره"}>
+            <ConfirmDialog title={"اطلاعات محصولات سفارش"} isOpen={isOpenDialog} onClose={handleCloseDialog}
+                onConfirm={user.role === "admin" ? handleConfirmDialog : undefined} confirmText={user.role === "admin" ? "ذخیره" : undefined} cancelText="باشه">
                 {selectedOrder && (
                     <div className="text-base font-vazir_regular flex flex-col justify-center gap-y-4">
                         <span>شماره سفارش: {selectedOrder.orderId}</span>
@@ -188,7 +191,9 @@ const OrdersPage = () => {
                         <span>تاریخ: {new Date(selectedOrder.createdAt).toLocaleDateString("fa-IR")}</span>
                         <p className="flex items-center gap-x-2">
                             <span>وضعیت: </span>
-                            <Select id={"status"} ref={selectStatusRef} defaultValue={selectedOrder.status} options={statusOrderOptions} />
+                            {user.role === "admin" ? <Select id={"status"} ref={selectStatusRef} defaultValue={selectedOrder.status} options={statusOrderOptions} /> : (
+                                statusOrderOptions.find((s) => s.slug === selectedOrder.status).name
+                            )}
                         </p>
                         <span>محصولات سفارش: </span>
                         {selectedOrder.items.map(item => (

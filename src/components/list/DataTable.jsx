@@ -21,7 +21,6 @@ const DataTable = ({ columns, data, renderActions }) => {
           {data.map((row) => (
             <tr key={row.id} className={rowClass}>
               {columns.map((column) => (
-                console.log(row),
                 <td key={column.key} className="p-4">
                   {column.render ? column.render(row) : row[column.key]}
                 </td>

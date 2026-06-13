@@ -24,10 +24,11 @@ const router = createBrowserRouter([
   { path: "/signup", element: <SignupPage /> },
   {
     path: "/dashboard",
-    element:
+    element: (
       <ProtectedRoute>
         <DashboardLayout />
-      </ProtectedRoute>,
+      </ProtectedRoute>
+    ),
     children: [
       { index: true, element: <DashboardPage /> },
       { path: "products", element: <ProductsPage /> },
@@ -68,11 +69,16 @@ const App = () => {
       <AuthProvider>
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
-          <Toaster richColors position="top-center" closeButton toastOptions={{
-            classNames: {
-              toast: "font-vazir_medium",
-            }
-          }} />
+          <Toaster
+            richColors
+            position="top-center"
+            closeButton
+            toastOptions={{
+              classNames: {
+                toast: "font-vazir_medium",
+              },
+            }}
+          />
         </QueryClientProvider>
       </AuthProvider>
     </ThemeProvider>
