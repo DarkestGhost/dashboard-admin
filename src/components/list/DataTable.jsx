@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const thClass =
   "text-zinc-800 dark:text-zinc-100 transition-all duration-300 ease-linear p-4";
 const rowClass =
@@ -26,7 +28,9 @@ const DataTable = ({ columns, data, renderActions }) => {
                 </td>
               ))}
               {renderActions && (
-                <td className="p-4 flex items-center gap-x-2">{renderActions(row)}</td>
+                <td className="p-4 flex items-center gap-x-2">
+                  {renderActions(row)}
+                </td>
               )}
             </tr>
           ))}
@@ -36,4 +40,4 @@ const DataTable = ({ columns, data, renderActions }) => {
   );
 };
 
-export default DataTable;
+export default memo(DataTable);

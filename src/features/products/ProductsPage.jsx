@@ -53,7 +53,7 @@ const ProductsPage = () => {
       acc[item.slug] = item.name;
       return acc;
     }, {});
-  }, [categorySearchOptions]);
+  }, [categorySearchOptions]);  
 
   const columns = useMemo(() => [
     { key: "name", header: "نام محصول" },
@@ -116,7 +116,7 @@ const ProductsPage = () => {
     }
 
     return results;
-  }, [categoryFilter, categorySearchOptions, products, search, sortBy]);
+  }, [categoryFilter, products, search, sortBy]);
 
   const { paginated, currentPage, totalPages, setCurrentPage, resetPage } =
     useClientPagination(filteredProducts);
